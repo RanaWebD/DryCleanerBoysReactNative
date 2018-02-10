@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, Linking } from 'react-native';
+import { View, Text, TouchableOpacity, ImageBackground, Image, ScrollView, Linking, Button } from 'react-native';
+import Card from '../common/Card';
 
 class MainScreen extends Component {
     constructor(props) {
@@ -9,7 +10,7 @@ class MainScreen extends Component {
     }
 
     render() {
-        const { header, headerText, bookNowBtn, buttonStyle, footer, footerItem, footerText } = styles;
+        const { header, offerContainer, imageBackground, offerContent, offerHeading, offerItem, offerPriceContent, offerPriceText, offerPriceAmount, headerText, bookNowBtn, buttonStyle, footer, footerItem, footerText } = styles;
         return (
             <View style={{ flex: 1 }}>
                 <View style={header}>
@@ -17,12 +18,65 @@ class MainScreen extends Component {
                 </View>
                 <ScrollView>
                     <View style={bookNowBtn}>
-                        <TouchableOpacity
-                            style={buttonStyle}
+                        <Button
+                            title='D I R E C T  B O O K I N G'
+                            color="#04A2E1"
                             onPress={() => this.props.onPress('go-to-booknow')}
-                        ><Text>BOOK NOW</Text>
-                        </TouchableOpacity>
+                        />
                     </View>
+                    <Card>
+                        <View style={offerContainer}>
+                            <ImageBackground
+                                style={imageBackground}
+                                source={{ uri: 'https://static.pexels.com/photos/212269/pexels-photo-212269.jpeg' }}
+                            >
+                                <View style={offerContent}>
+                                    <Text style={offerHeading}>D r y  C l e a n</Text>
+                                    <Text style={offerItem}>3 Blanket</Text>
+                                    <View style={offerPriceContent}>
+                                        <Text style={offerPriceText}>only in</Text>
+                                        <Text style={offerPriceAmount}>549</Text>
+                                    </View>
+                                </View>
+                            </ImageBackground>
+                        </View>
+                    </Card>
+                    <Card>
+                        <View style={offerContainer}>
+                            <ImageBackground
+                                style={imageBackground}
+                                source={{ uri: 'https://static.pexels.com/photos/212269/pexels-photo-212269.jpeg' }}
+                            >
+                                <View style={offerContent}>
+                                    <Text style={offerHeading}>D r y  C l e a n</Text>
+                                    <Text style={offerItem}>3 Blanket</Text>
+                                    <View style={offerPriceContent}>
+                                        <Text style={offerPriceText}>only in</Text>
+                                        <Text style={offerPriceAmount}>549</Text>
+                                    </View>
+                                </View>
+                            </ImageBackground>
+                        </View>
+                    </Card>
+                    <Card>
+                        <View style={offerContainer}>
+                            <ImageBackground
+                                style={imageBackground}
+                                source={{ uri: 'https://static.pexels.com/photos/212269/pexels-photo-212269.jpeg' }}
+                            >
+                                <View style={offerContent}>
+                                    <Text style={offerHeading}>D r y  C l e a n</Text>
+                                    <Text style={offerItem}>3 Blanket</Text>
+                                    <View style={offerPriceContent}>
+                                        <Text style={offerPriceText}>only in</Text>
+                                        <Text style={offerPriceAmount}>549</Text>
+                                    </View>
+                                </View>
+                            </ImageBackground>
+                        </View>
+                    </Card>
+
+
                 </ScrollView>
                 <View style={footer}>
                     {/* <TouchableOpacity
@@ -78,6 +132,42 @@ const styles = {
         fontSize: 20,
         color: 'white',
         marginTop: 20
+    },
+    offerContainer: {
+        height: 150
+    },
+    imageBackground: {
+        backgroundColor: '#ccc',
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center'
+    },
+    offerContent: {
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.2)'
+    },
+    offerHeading: {
+        fontSize: 30,
+        marginBottom: 15,
+        color: 'white'
+    },
+    offerItem: {
+        fontSize: 20,
+        color: 'white',
+        marginBottom: 10
+    },
+    offerPriceContent: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    offerPriceText: {
+        color: 'gray',
+        width: 50,
+        alignItems: 'space-between'
+    },
+    offerPriceAmount: {
+        fontSize: 20
     },
     content: {
         padding: 10
