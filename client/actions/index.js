@@ -10,21 +10,38 @@ export const onTimeSubmit = (schduleTime) => {
     };
 };
 
+//Send Otp
 export const onAddressSubmit = (address) => {
     //Send a requst to node server so that node server can send a otp request to MSG91 server
-    const obj = { number: address.number };
-    JSON.stringify(obj);
+    const numberObj = { number: address.number };
+    JSON.stringify(numberObj);
 
-    axios.post('http://192.168.0.106:3000/sendOTP', obj)
+    axios.post('http://192.168.0.106:3000/sendOTP', numberObj)
         .then(response => {
-            console.log("response");
+            console.log(response);
         })
         .catch(error => {
-            console.log('error');
+            console.log(error);
         });
+
     return {
         type: 'ADDRESS',
         payload: address
+    };
+};
+
+//Verify Otp
+export const verifyOtp = (data) => {
+    axios.post('http://192.168.0.106:3000/verifyOTP', data)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    return {
+        type: 'OTP_VERIFY_RESPONSE',
+        payload: data
     };
 };
 

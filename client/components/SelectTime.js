@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Button } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ButtonContainer from '../common/ButtonContainer';
 import { onTimeSubmit } from '../actions/index';
 
 class SelectTime extends Component {
@@ -678,13 +679,13 @@ class SelectTime extends Component {
                     </View >
                 </View >
 
-                <View style={nextBtnContainer}>
+                <ButtonContainer>
                     <Button
                         title="N E X T   S T E P"
                         color="#04A2E1"
                         onPress={() => this.onSubmit()}
                     />
-                </View>
+                </ButtonContainer>
             </View >
         );
     }
@@ -786,12 +787,5 @@ const styles = {
     },
     deliveryTimeSection: {
         position: 'relative', marginTop: 10
-    },
-    nextBtnContainer: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 10,
-        marginRight: 5,
-        marginLeft: 5
     }
 };

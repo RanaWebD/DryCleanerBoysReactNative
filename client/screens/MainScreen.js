@@ -3,9 +3,7 @@ import Home from '../components/Home';
 
 export default class MainScreen extends Component {
   static navigationOptions = {
-    title: 'Home',
-    headerTintColor: 'white',
-    headerStyle: { backgroundColor: '#04A2E1' }
+    header: null,
   };
 
   onPress = (element) => {

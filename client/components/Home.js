@@ -9,9 +9,12 @@ class MainScreen extends Component {
     }
 
     render() {
-        const { bookNowBtn, buttonStyle, footer, footerItem, footerText } = styles;
+        const { header, headerText, bookNowBtn, buttonStyle, footer, footerItem, footerText } = styles;
         return (
             <View style={{ flex: 1 }}>
+                <View style={header}>
+                    <Text style={headerText}>DryCleaner Boys</Text>
+                </View>
                 <ScrollView>
                     <View style={bookNowBtn}>
                         <TouchableOpacity
@@ -22,7 +25,7 @@ class MainScreen extends Component {
                     </View>
                 </ScrollView>
                 <View style={footer}>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         onPress={() => this.props.onPress('go-to-home')}
                         style={footerItem}
                     >
@@ -30,7 +33,7 @@ class MainScreen extends Component {
                             source={require('../assets/images/home.png')}
                         />
                         <Text style={footerText}>Home</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity
                         onPress={() => this.props.onPress('go-to-price')}
                         style={footerItem}
@@ -60,6 +63,22 @@ class MainScreen extends Component {
 export default MainScreen;
 
 const styles = {
+    header: {
+        height: 80,
+        backgroundColor: '#04A2E1',
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowOpacity: 0.75,
+        shadowRadius: 5,
+        shadowColor: 'red',
+        shadowOffset: { height: 0, width: 0 },
+    },
+    headerText: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: 'white',
+        marginTop: 20
+    },
     content: {
         padding: 10
     },

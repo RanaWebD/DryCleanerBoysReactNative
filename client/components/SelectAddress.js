@@ -3,6 +3,7 @@ import { ScrollView, View, Button } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage, CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { onAddressSubmit } from '../actions';
+import ButtonContainer from '../common/ButtonContainer';
 
 
 class SelectAddress extends Component {
@@ -30,11 +31,16 @@ class SelectAddress extends Component {
     //Toggle the services checkboxes
     onServicePress(value) {
         if (value === 'dry') {
-
-            if (this.state.DryCleanService) {
-                this.setState({ DryCleanService: false });
-            }
-            this.setState({ DryCleanService: true });
+            !this.state.DryCleanService ? this.setState({ DryCleanService: true }) : this.setState({ DryCleanService: false });
+        }
+        if (value === 'laundry') {
+            !this.state.LaundryService ? this.setState({ LaundryService: true }) : this.setState({ LaundryService: false });
+        }
+        if (value === 'wash') {
+            !this.state.WashingService ? this.setState({ WashingService: true }) : this.setState({ WashingService: false });
+        }
+        if (value === 'iron') {
+            !this.state.IroningService ? this.setState({ IroningService: true }) : this.setState({ IroningService: false });
         }
     }
 
@@ -77,13 +83,16 @@ class SelectAddress extends Component {
             this.setState({ addErr: err, nameErr: '', numberErr: '', stateErr: '', pincodeErr: '' });
         } else if (!state.number) {
             this.setState({ numberErr: err, nameErr: '', addErr: '', stateErr: '', pincodeErr: '' });
+        } else if (!state.state) {
+            this.setState({ stateErr: err, nameErr: '', addErr: '', numberErr: '', pincodeErr: '' });
+        } else if (!state.pincode) {
+            this.setState({ pincodeErr: err, nameErr: '', addErr: '', stateErr: '', numberErr: '' });
         } else {
             //Action creator
             this.props.onAddressSubmit(address);
             //Redirect page to an another page
             this.props.onConfirm();
         }
-
     }
 
     render() {
@@ -135,7 +144,7 @@ class SelectAddress extends Component {
                             <CheckBox
                                 title='Laundry'
                                 checked={this.state.LaundryService}
-                                onPress={() => { this.setState({ LaundryService: true }); }}
+                                onPress={() => this.onServicePress('laundry')}
                             />
                         </View>
                     </View>
@@ -144,26 +153,26 @@ class SelectAddress extends Component {
                         <View style={servicesCheckBoxContainer}>
                             <CheckBox
                                 title='Washing'
-                                checked={this.state.WasingService}
-                                onPress={() => { this.setState({ WasingService: true }); }}
+                                checked={this.state.WashingService}
+                                onPress={() => this.onServicePress('wash')}
                             />
                         </View>
                         <View style={servicesCheckBoxContainer}>
                             <CheckBox
                                 title='Ironing'
                                 checked={this.state.IroningService}
-                                onPress={() => { this.setState({ IroningService: true }); }}
+                                onPress={() => this.onServicePress('iron')}
                             />
                         </View>
                     </View>
                 </View>
-                <View style={styles.nextBtnContainer}>
+                <ButtonContainer>
                     <Button
                         title="A L L  M O S T  T H E R E "
                         color="#04A2E1"
                         onPress={() => this.onSubmit()}
                     />
-                </View>
+                </ButtonContainer>
             </ScrollView>
         );
     }
@@ -187,12 +196,5 @@ const styles = {
     },
     servicesCheckBoxContainer: {
         flex: 1
-    },
-    nextBtnContainer: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 10,
-        marginRight: 5,
-        marginLeft: 5
     }
 }

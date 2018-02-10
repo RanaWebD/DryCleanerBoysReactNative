@@ -17,41 +17,39 @@ var settings = {
         "content-type": "application/json"
     }
 }
-// var data = {
-//     "sender": "SOCKET",
-//     "route": "4",
-//     "country": "91",
-//     "sms": [
-//         {
-//             "message": "Message1",
-//             "to": [
-//                 "8802869692"
-//             ]
-//         }
-//     ]
-// }
+var data = {
+    "sender": "SOCKET",
+    "route": "4",
+    "country": "91",
+    "sms": [
+        {
+            "message": "Message1",
+            "to": [
+                "8802869692"
+            ]
+        }
+    ]
+}
 
-//create a post route and get post data from client side request
-// app.post('/sendOTP', (req, res) => {
-//     // console.log(req.body)
-//     // const URL = `http://control.msg91.com/api/sendotp.php?authkey=192579Aatee7h2Bnf5a56df3d&mobile=${req.body.number}`;
-
-//     // console.log(URL),
-//     //     //send a post request on MSG91 with the req.body
-//     //     axios.post(URL).then(res => { console.log(res) }).catch(err => { console.log(err) })
-// });
+// create a post route and get post data from client side request
+app.post('/sendOTP', (req, res) => {
+    const URL = `http://control.msg91.com/api/sendotp.php?authkey=192579Aatee7h2Bnf5a56df3d&mobile=${req.body.number}`;
+    //send a post request on MSG91 with the req.body
+    axios.post(URL)
+        .then(response => { res.send(response) })
+        .catch(err => { res.send(err) })
+});
 
 
 
 //create a post route and get post data from client side request
 app.post('/verifyOTP', (req, res) => {
     if (req.body.OTP !== null) {
-        console.log(req.body.number)
         let url = `https://control.msg91.com/api/verifyRequestOTP.php?authkey=192579Aatee7h2Bnf5a56df3d&mobile=${req.body.number}&otp=${req.body.OTP}`;
         axios.post(url)
             .then(response => {
-                res.send(response)
-                // axios.post('http://api.msg91.com/api/v2/sendsms', req.body.data, settings).then(res => console.log(res))
+                console.log(response)
+                axios.post('http://api.msg91.com/api/v2/sendsms', req.body.data, settings).then(res => console.log(res))
             })
             .catch(err => { res.send(err) })
     }

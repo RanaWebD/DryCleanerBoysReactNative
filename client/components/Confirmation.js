@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 import Card from '../common/Card';
+import ButtonContainer from '../common/ButtonContainer';
 
 class Confirmation extends Component {
     render() {
@@ -10,7 +11,7 @@ class Confirmation extends Component {
         const totalPrice = this.props.PriceListFooterData.totalPrice;
         const quantity = this.props.PriceListFooterData.totalQuantity;
 
-        const { firstCardSection, secondCardSection, thirdCardSection, contentBoxLeft, contentBoxRight, title, pickupDayDateContent, deliveryDayDateContent, priceAndQuantityContent } = styles;
+        const { firstCardSection, secondCardSection, thirdCardSection, contentBoxLeft, contentBoxRight, title, pickupDayDateContent, deliveryDayDateContent, priceAndQuantityContent, servicesContent } = styles;
         return (
             <View style={{ flex: 1 }}>
                 <Card>
@@ -54,27 +55,29 @@ class Confirmation extends Component {
                     </View>
 
                     <View style={secondCardSection}>
-                        <Text style={title}>Address</Text>
+                        <Text style={title}>Address:</Text>
                         <Text>{add.address}</Text>
                         <Text>{add.state}</Text>
                         <Text>{add.pincode}</Text>
                     </View>
                     <View style={thirdCardSection}>
-                        <Text style={title}>Services</Text>
-                        <Text>{add.DryCleanService}</Text>
-                        <Text>{add.LaundryService}</Text>
-                        <Text>{add.WashingService}</Text>
-                        <Text>{add.IroningService}</Text>
+                        <Text style={title}>Services:</Text>
+                        <View style={servicesContent}>
+                            <Text>{add.DryCleanService}</Text>
+                            <Text>{add.LaundryService}</Text>
+                            <Text>{add.WashingService}</Text>
+                            <Text>{add.IroningService}</Text>
+                        </View>
                     </View>
                 </Card>
 
-                <View style={styles.nextBtnContainer}>
+                <ButtonContainer>
                     <Button
                         title="H O M E   P A G E"
                         color="#04A2E1"
                         onPress={() => this.props.onOrderDetails()}
                     />
-                </View>
+                </ButtonContainer>
             </View >
         );
     }
@@ -89,11 +92,12 @@ export default connect(mapStateToProps)(Confirmation);
 const styles = {
     firstCardSection: {
         flexDirection: 'row',
-        backgroundColor: '#33D65B',
         padding: 5
     },
     secondCardSection: {
-        backgroundColor: '#33D65B',
+        padding: 5
+    },
+    thirdCardSection: {
         padding: 5
     },
     priceAndQuantityContent: {
@@ -114,11 +118,8 @@ const styles = {
     deliveryDayDateContent: {
         flexDirection: 'row'
     },
-    nextBtnContainer: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 10,
-        marginRight: 5,
-        marginLeft: 5
+    servicesContent: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
     }
 };
