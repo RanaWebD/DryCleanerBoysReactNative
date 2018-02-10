@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "title": "Shirt",
+        "price": 50,
+        "img": "https://cdn.pixabay.com/photo/2017/11/02/14/27/model-2911332_960_720.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Trouser",
+        "price": 50,
+        "img": "https://cdn.pixabay.com/photo/2017/08/27/05/33/trousers-2685231_960_720.jpg"
+    },
+    {
+        "id": 3,
+        "title": "T-Shirt",
+        "price": 50,
+        "img": "https://cdn.pixabay.com/photo/2017/01/13/04/56/blank-1976334_960_720.png"
+    },
+    {
+        "id": 4,
+        "title": "Kurta",
+        "price": 50,
+        "img": "https://cdn.pixabay.com/photo/2017/06/10/01/12/slam-2388763_960_720.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Kurta Fancy",
+        "price": 80,
+        "img": ""
+    },
+    {
+        "id": 6,
+        "title": "Kurta Pyjama",
+        "price": 100,
+        "img": "https://cdn.pixabay.com/photo/2017/01/01/11/05/asian-boys-1944326_960_720.jpg"
+    },
+    {
+        "id": 7,
+        "title": "Pyjama",
+        "price": 50,
+        "img": "https://images.unsplash.com/photo-1489345745021-740d36bbda21?auto=format&fit=crop&w=751&q=80"
+    },
+    {
+        "id": 8,
+        "title": "Coat/Blazer",
+        "price": 150,
+        "img": "https://images.unsplash.com/photo-1438354886727-070458b3b5cf?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3f9d26b790bab974d3f22c770d3b0dd2&auto=format&fit=crop&w=644&q=80"
+    },
+    {
+        "id": 9,
+        "title": "Coat Pant/3pec",
+        "price": 200,
+        "img": "https://images.unsplash.com/photo-1459204137123-238c569e22bd?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ed903569f094146d1e8294f47999c106&auto=format&fit=crop&w=753&q=80"
+    },
+    {
+        "id": 10,
+        "title": "Shorts",
+        "price": 50,
+        "img": "https://image.freepik.com/free-photo/texture-blue-background-clothes-color_1203-6522.jpg"
+    },
+    {
+        "id": 11,
+        "title": "Sweater",
+        "price": 100,
+        "img": "https://image.freepik.com/free-photo/sweater-on-wooden-background_1203-8157.jpg"
+    },
+    {
+        "id": 12,
+        "title": "Half Sweater",
+        "price": 80,
+        "img": "https://cdn.pixabay.com/photo/2016/03/27/19/31/fashion-1283863_960_720.jpg"
+    },
+    {
+        "id": 13,
+        "title": "Leather Jacket",
+        "price": 250,
+        "img": "https://images.unsplash.com/photo-1489286696299-aa7486820bd5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5e05a1412f3ea3b087ea5210b1f9128f&auto=format&fit=crop&w=751&q=80"
+    },
+    {
+        "id": 14,
+        "title": "Rexine Jacket",
+        "price": 200,
+        "img": "https://images.unsplash.com/photo-1438763298591-75a0d42b7265?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5e68a9b1f38a8030d9dc3aab48ca1d27&auto=format&fit=crop&w=750&q=80"
+    },
+    {
+        "id": 15,
+        "title": "Sherwani(Bridal)",
+        "price": 450,
+        "img": "https://i.pinimg.com/564x/58/c2/76/58c276ac1bc1ea6213dc071b177468e7.jpg"
+    },
+    {
+        "id": 16,
+        "title": "Sherwani(Non-Bridal)",
+        "price": 250,
+        "img": "https://i.pinimg.com/564x/c6/ac/fa/c6acfac69aedcc4da8092565c492da29.jpg"
+    }
+]

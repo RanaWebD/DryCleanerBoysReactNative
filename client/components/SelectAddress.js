@@ -1,0 +1,198 @@
+import React, { Component } from 'react';
+import { ScrollView, View, Button } from 'react-native';
+import { FormLabel, FormInput, FormValidationMessage, CheckBox } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { onAddressSubmit } from '../actions';
+
+
+class SelectAddress extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            name: null,
+            address: null,
+            state: null,
+            pincode: null,
+            number: null,
+            nameErr: '',
+            addErr: '',
+            numberErr: '',
+            stateErr: '',
+            pincodeErr: '',
+            DryCleanService: false,
+            LaundryService: false,
+            WashingService: false,
+            IroningService: false
+        };
+    }
+
+    //Toggle the services checkboxes
+    onServicePress(value) {
+        if (value === 'dry') {
+
+            if (this.state.DryCleanService) {
+                this.setState({ DryCleanService: false });
+            }
+            this.setState({ DryCleanService: true });
+        }
+    }
+
+    onSubmit() {
+        const state = this.state;
+        const err = 'This field id empty';
+
+        const address = {
+            name: state.name,
+            address: state.address,
+            state: state.state,
+            pincode: state.pincode,
+            number: state.number,
+            DryCleanService: '',
+            LaundryService: '',
+            WashingService: '',
+            IroningService: ''
+        };
+
+        //save the text into services depending depending on true or false
+        if (state.DryCleanService) {
+            address.DryCleanService = 'Dry Clean';
+        }
+
+        if (state.LaundryService) {
+            address.LaundryService = 'Laundry';
+        }
+
+        if (state.WashingService) {
+            address.WashingService = 'Washing';
+        }
+
+        if (state.IroningService) {
+            address.IroningService = 'Ironing';
+        }
+
+        if (!state.name) {
+            this.setState({ nameErr: err, addErr: '', numberErr: '', stateErr: '', pincodeErr: '' });
+        } else if (!state.address) {
+            this.setState({ addErr: err, nameErr: '', numberErr: '', stateErr: '', pincodeErr: '' });
+        } else if (!state.number) {
+            this.setState({ numberErr: err, nameErr: '', addErr: '', stateErr: '', pincodeErr: '' });
+        } else {
+            //Action creator
+            this.props.onAddressSubmit(address);
+            //Redirect page to an another page
+            this.props.onConfirm();
+        }
+
+    }
+
+    render() {
+        const { stateAndPincodeFormContent, formContainer, servicesSection, servicesContent, servicesCheckBoxContainer } = styles;
+        return (
+            <ScrollView
+                style={{ flex: 1 }}
+                pagingEnabled
+            >
+                <View>
+                    <FormLabel>Name</FormLabel>
+                    <FormInput onChangeText={name => { this.setState({ name }); }} />
+                    <FormValidationMessage>{this.state.nameErr}</FormValidationMessage>
+                </View>
+                <View>
+                    <FormLabel>Address</FormLabel>
+                    <FormInput onChangeText={address => { this.setState({ address }); }} />
+                    <FormValidationMessage>{this.state.addressErr}</FormValidationMessage>
+                </View>
+                <View>
+                    <FormLabel>Contect Number</FormLabel>
+                    <FormInput type='number' onChangeText={number => { this.setState({ number }); }} />
+                    <FormValidationMessage>{this.state.numberErr}</FormValidationMessage>
+                </View>
+                <View style={stateAndPincodeFormContent}>
+                    <View style={formContainer}>
+                        <FormLabel>State</FormLabel>
+                        <FormInput onChangeText={state => { this.setState({ state }); }} />
+                        <FormValidationMessage>{this.state.stateErr}</FormValidationMessage>
+                    </View>
+                    <View style={formContainer}>
+                        <FormLabel>PinCode</FormLabel>
+                        <FormInput onChangeText={pincode => { this.setState({ pincode }); }} />
+                        <FormValidationMessage>{this.state.pincodeErr}</FormValidationMessage>
+                    </View>
+                </View>
+
+                <View style={servicesSection}>
+                    <FormLabel>Services</FormLabel>
+                    <View style={servicesContent}>
+                        <View style={servicesCheckBoxContainer}>
+                            <CheckBox
+                                title='Dry Clean'
+                                checked={this.state.DryCleanService}
+                                onPress={() => this.onServicePress('dry')}
+                            />
+                        </View>
+                        <View style={servicesCheckBoxContainer}>
+                            <CheckBox
+                                title='Laundry'
+                                checked={this.state.LaundryService}
+                                onPress={() => { this.setState({ LaundryService: true }); }}
+                            />
+                        </View>
+                    </View>
+
+                    <View style={servicesContent}>
+                        <View style={servicesCheckBoxContainer}>
+                            <CheckBox
+                                title='Washing'
+                                checked={this.state.WasingService}
+                                onPress={() => { this.setState({ WasingService: true }); }}
+                            />
+                        </View>
+                        <View style={servicesCheckBoxContainer}>
+                            <CheckBox
+                                title='Ironing'
+                                checked={this.state.IroningService}
+                                onPress={() => { this.setState({ IroningService: true }); }}
+                            />
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.nextBtnContainer}>
+                    <Button
+                        title="A L L  M O S T  T H E R E "
+                        color="#04A2E1"
+                        onPress={() => this.onSubmit()}
+                    />
+                </View>
+            </ScrollView>
+        );
+    }
+}
+
+export default connect(null, { onAddressSubmit })(SelectAddress);
+
+const styles = {
+    stateAndPincodeFormContent: {
+        flexDirection: 'row',
+        flex: 1
+    },
+    formContainer: {
+        flex: 1
+    },
+    servicesSection: {
+        marginBottom: 10
+    },
+    servicesContent: {
+        flexDirection: 'row'
+    },
+    servicesCheckBoxContainer: {
+        flex: 1
+    },
+    nextBtnContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        marginBottom: 10,
+        marginRight: 5,
+        marginLeft: 5
+    }
+}

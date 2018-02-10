@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "title": "Toy Small",
+        "price": 100,
+        "img": "https://cdn.pixabay.com/photo/2018/02/06/23/24/teddy-3135954_960_720.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Toy Medium",
+        "price": 150,
+        "img": "https://cdn.pixabay.com/photo/2018/01/30/01/54/teddy-3117760_960_720.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Toy Large",
+        "price": 200,
+        "img": "https://cdn.pixabay.com/photo/2018/02/04/16/45/time-heals-all-wounds-3130253_960_720.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Umbrella",
+        "price": 80,
+        "img": "https://cdn.pixabay.com/photo/2018/01/16/23/10/umbrella-3087101_960_720.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Tie",
+        "price": 40,
+        "img": "https://cdn.pixabay.com/photo/2015/10/14/14/56/cravats-987782_960_720.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Cap",
+        "price": 40,
+        "img": "https://cdn.pixabay.com/photo/2017/11/06/13/45/cap-2923682_960_720.jpg"
+    },
+    {
+        "id": 7,
+        "title": "Hat",
+        "price": 60,
+        "img": "https://cdn.pixabay.com/photo/2016/05/17/22/16/baby-1399332_960_720.jpg"
+    },
+    {
+        "id": 8,
+        "title": "Back Pack",
+        "price": 250,
+        "img": "https://cdn.pixabay.com/photo/2017/08/06/12/41/people-2592167_960_720.jpg"
+    }
+]

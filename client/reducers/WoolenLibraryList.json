@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "title": "Jacket",
+        "price": 120,
+        "img": "https://cdn.pixabay.com/photo/2018/01/29/19/55/fur-3117033_960_720.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Half Jacket",
+        "price": 100,
+        "img": "https://cdn.pixabay.com/photo/2015/11/07/11/25/vest-1031127_960_720.jpg"
+    },
+    {
+        "id": 3,
+        "title": "sweater",
+        "price": 100,
+        "img": "https://cdn.pixabay.com/photo/2017/08/02/12/58/people-2571462_960_720.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Blanket (Single)",
+        "price": 200,
+        "img": "https://cdn.pixabay.com/photo/2016/01/19/23/08/bed-1150578_960_720.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Blanket (Double)",
+        "price": 250,
+        "img": "https://cdn.pixabay.com/photo/2017/08/05/20/46/bed-2585472_960_720.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Quilt (Single)",
+        "price": 200,
+        "img": "https://cdn.pixabay.com/photo/2015/12/29/07/37/picnic-1112398_960_720.jpg"
+    },
+    {
+        "id": 7,
+        "title": "Quilt (Double)",
+        "price": 300,
+        "img": "https://cdn.pixabay.com/photo/2015/04/10/20/11/quilt-716838_960_720.jpg"
+    },
+    {
+        "id": 8,
+        "title": "Muffler",
+        "price": 60,
+        "img": "https://cdn.pixabay.com/photo/2017/12/27/20/40/scarf-3043734_960_720.jpg"
+    },
+    {
+        "id": 9,
+        "title": "Shawl",
+        "price": 80,
+        "img": "https://cdn.pixabay.com/photo/2018/01/30/12/12/textile-3118642_960_720.jpg"
+    }
+]

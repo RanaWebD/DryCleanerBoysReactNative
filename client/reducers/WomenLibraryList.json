@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "title": "Kurta",
+        "price": 50,
+        "img": "https://cdn.pixabay.com/photo/2015/01/27/11/28/kurtas-613678_960_720.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Kurta (Heavy)",
+        "price": 80,
+        "img": "https://cdn.pixabay.com/photo/2015/02/24/09/10/ethnic-wear-647202_960_720.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Top",
+        "price": 50,
+        "img": "https://cdn.pixabay.com/photo/2016/08/26/20/44/elan-1623083_960_720.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Saree",
+        "price": 100,
+        "img": "https://cdn.pixabay.com/photo/2015/04/22/15/26/saree-734948_960_720.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Saree (Silk)",
+        "price": 150,
+        "img": "https://cdn.pixabay.com/photo/2015/11/19/11/18/wedding-saree-collection-1050929__340.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Saree (Heavy)",
+        "price": 150,
+        "img": "https://cdn.pixabay.com/photo/2015/11/19/11/20/wedding-silk-paithani-saree-1050936_960_720.jpg"
+    },
+    {
+        "id": 7,
+        "title": "Lengha",
+        "price": 250,
+        "img": "https://i.pinimg.com/originals/ce/d4/f9/ced4f988f9a83abbfa189335dcaf4699.jpg"
+    },
+    {
+        "id": 8,
+        "title": "Lengha (Bridal)",
+        "price": 450,
+        "img": "http://www.krishnasarees.com/lengha-c10/bridal-lenghas-c231/wbl1079-latest-baby-pink-and-purple-bridal-lengha-p7154"
+    },
+    {
+        "id": 9,
+        "title": "Dupatta",
+        "price": 60,
+        "img": "https://5.imimg.com/data5/QY/TF/MY-40013527/desinger-dupatta-2-500x500.jpg"
+    },
+    {
+        "id": 10,
+        "title": "Blouse",
+        "price": 50,
+        "img": "https://images.unsplash.com/photo-1489345745021-740d36bbda21?auto=format&fit=crop&w=751&q=80"
+    },
+    {
+        "id": 11,
+        "title": "Skirt",
+        "price": 50,
+        "img": "https://cdn.pixabay.com/photo/2015/04/20/17/00/fashion-731827_960_720.jpg"
+    },
+    {
+        "id": 12,
+        "title": "Ladies Suit",
+        "price": 100,
+        "img": "https://cdn.pixabay.com/photo/2015/02/24/13/28/suit-647415_960_720.jpg"
+    },
+    {
+        "id": 13,
+        "title": "Coat/Blazer",
+        "price": 150,
+        "img": "https://cdn.pixabay.com/photo/2017/12/01/18/49/suit-2991514_960_720.jpg"
+    },
+    {
+        "id": 14,
+        "title": "Stole",
+        "price": 60,
+        "img": "https://ae01.alicdn.com/kf/HTB1ZYE5gTAKL1JjSZFCq6xFspXaV/New-Ladies-Neck-Stole-Elephant-Print-Long-Scarf-Shawl-Wrap-Pashmina-echarpes-foulards-femme-free-shipping.jpg_640x640.jpg"
+    }
+]
