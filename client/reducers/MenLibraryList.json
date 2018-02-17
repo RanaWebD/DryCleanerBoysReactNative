@@ -21,13 +21,13 @@
         "id": 4,
         "title": "Kurta",
         "price": 50,
-        "img": "https://cdn.pixabay.com/photo/2017/06/10/01/12/slam-2388763_960_720.jpg"
+        "img": "https://5.imimg.com/data5/GG/TI/MY-38185301/white-cotton-kurta-500x500.jpg"
     },
     {
         "id": 5,
         "title": "Kurta Fancy",
         "price": 80,
-        "img": ""
+        "img": "https://5.imimg.com/data5/QU/QT/MY-37851283/gents-fancy-kurta-500x500.jpg"
     },
     {
         "id": 6,
@@ -39,7 +39,7 @@
         "id": 7,
         "title": "Pyjama",
         "price": 50,
-        "img": "https://images.unsplash.com/photo-1489345745021-740d36bbda21?auto=format&fit=crop&w=751&q=80"
+        "img": "http://www.pcoswal.com/images/summer-wear5.jpg"
     },
     {
         "id": 8,

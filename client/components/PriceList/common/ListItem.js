@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { PriceExtimate } from '../../../actions/';
+import { PriceExtimate, selectedItem } from '../../../actions';
 import Card from '../../../common/Card';
+import styles from '../../../css/ListItemCSS';
 
 // this component render every time when some chick on any list item that why all values reset every time
 class ListItem extends Component {
@@ -11,24 +12,36 @@ class ListItem extends Component {
 
         this.state = {
             quantity: 0,
-            total: 0,
+            amount: 0
         };
     }
 
     //Invoke this function every time use user press of + and  - buttons
-    onPress(val) {
+    onPress(val, data) {
         const price = this.props.library.price;
         const quantity = this.state.quantity;
 
         if (val === '-' && this.state.quantity !== 0) {
             this.setState({ quantity: quantity - 1 });
+
+            data.itmeTotalQuantity = this.state.quantity - 1;
+
+            this.state.amount = this.state.amount - data.price;
+            data.itmeTotalAmount = this.state.amount;
         }
         if (val === '+') {
             this.setState({ quantity: quantity + 1 });
+
+            data.itmeTotalQuantity = this.state.quantity + 1;
+
+            this.state.amount = this.state.amount + data.price;
+            data.itmeTotalAmount = this.state.amount;
+
         }
 
         //Call a action creater with the val and price paramenters
         this.props.PriceExtimate(val, price, quantity);
+        this.props.selectedItem(data);
     }
 
     render() {
@@ -47,13 +60,13 @@ class ListItem extends Component {
                             <View style={styles.quantityBox} >
                                 <View>
                                     <TouchableOpacity
-                                        onPress={() => { this.onPress('-'); }}
+                                        onPress={() => { this.onPress('-', data); }}
                                     ><Text style={styles.quantity}>-</Text></TouchableOpacity>
                                 </View>
                                 <Text style={styles.quantity}>{this.state.quantity}</Text>
                                 <View>
                                     <TouchableOpacity
-                                        onPress={() => { this.onPress('+'); }}
+                                        onPress={() => { this.onPress('+', data); }}
                                     ><Text style={styles.quantity}>+</Text></TouchableOpacity>
                                 </View>
                             </View>
@@ -66,61 +79,4 @@ class ListItem extends Component {
 }
 
 //Connet react component with redux store and action creator with the help of react-redux connect funtion
-export default connect(null, { PriceExtimate })(ListItem);
-
-const styles = {
-    container: {
-        flex: 1
-    },
-    imageBackground: {
-        backgroundColor: '#ccc',
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        justifyContent: 'center'
-    },
-    imageBackgroundTitle: {
-        backgroundColor: 'rgba(0,0,0,0.2)',
-        textAlign: 'center',
-        fontSize: 30,
-        paddingTop: 10,
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingBottom: 5,
-        color: 'white'
-    },
-    price: {
-        textAlign: 'center',
-        color: 'white',
-        paddingBottom: 10,
-        backgroundColor: 'rgba(0,0,0,0.2)'
-    },
-    quantityContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginBottom: 0,
-        paddingTop: 50,
-    },
-    quantityBox: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        backgroundColor: '#f5f5f5',
-        borderRadius: 4,
-        borderWidth: 0.5,
-        borderColor: '#d6d7da',
-        width: 200,
-        padding: 2
-    },
-    quantity: {
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    footer: {
-        backgroundColor: "pink",
-        flexDirection: 'row',
-        justifyContent: 'center'
-    },
-    footerContent: {
-        flexDirection: 'row',
-    }
-};
+export default connect(null, { PriceExtimate, selectedItem })(ListItem);

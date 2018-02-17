@@ -9,7 +9,6 @@ export default class ConfirmationScreen extends Component {
     };
 
     onComfirm() {
-        alert("otp")
         this.props.navigation.navigate('Confirmation');
     }
 

@@ -4,7 +4,7 @@ import { FormLabel, FormInput, FormValidationMessage, CheckBox } from 'react-nat
 import { connect } from 'react-redux';
 import { onAddressSubmit } from '../actions';
 import ButtonContainer from '../common/ButtonContainer';
-
+import styles from '../css/SelectAddressCSS';
 
 class SelectAddress extends Component {
     constructor(props) {
@@ -30,17 +30,11 @@ class SelectAddress extends Component {
 
     //Toggle the services checkboxes
     onServicePress(value) {
-        if (value === 'dry') {
-            !this.state.DryCleanService ? this.setState({ DryCleanService: true }) : this.setState({ DryCleanService: false });
-        }
-        if (value === 'laundry') {
-            !this.state.LaundryService ? this.setState({ LaundryService: true }) : this.setState({ LaundryService: false });
-        }
-        if (value === 'wash') {
-            !this.state.WashingService ? this.setState({ WashingService: true }) : this.setState({ WashingService: false });
-        }
-        if (value === 'iron') {
-            !this.state.IroningService ? this.setState({ IroningService: true }) : this.setState({ IroningService: false });
+        switch (value) {
+            case 'dry': this.setState({ DryCleanService: !this.state.DryCleanService }); break;
+            case 'laundry': this.setState({ LaundryService: !this.state.LaundryService }); break;
+            case 'wash': this.setState({ WashingService: !this.state.WashingService }); break;
+            case 'iron': this.setState({ IroningService: !this.state.IroningService }); break;
         }
     }
 
@@ -50,7 +44,7 @@ class SelectAddress extends Component {
 
         const address = {
             name: state.name,
-            address: state.address,
+            add: state.address,
             state: state.state,
             pincode: state.pincode,
             number: state.number,
@@ -90,8 +84,17 @@ class SelectAddress extends Component {
         } else {
             //Action creator
             this.props.onAddressSubmit(address);
-            //Redirect page to an another page
-            this.props.onConfirm();
+            //API response take some second to response so that we used setTimeout
+            setTimeout(() => {
+                //Redirect the page if API response is 200
+                if (this.props.Address.status !== 'Please Enter valid mobile no') {
+                    alert('OTP Send!');
+                    this.props.onConfirm();
+                } else {
+                    //Alert user in condition of server down etc.
+                    alert("Please Enter valid mobile no.");
+                }
+            }, 2000);
         }
     }
 
@@ -168,7 +171,7 @@ class SelectAddress extends Component {
                 </View>
                 <ButtonContainer>
                     <Button
-                        title="A L L  M O S T  T H E R E "
+                        title="A L M O S T  T H E R E "
                         color="#04A2E1"
                         onPress={() => this.onSubmit()}
                     />
@@ -178,23 +181,8 @@ class SelectAddress extends Component {
     }
 }
 
-export default connect(null, { onAddressSubmit })(SelectAddress);
+const mapStateToProps = ({ Address }) => {
+    return { Address };
+};
 
-const styles = {
-    stateAndPincodeFormContent: {
-        flexDirection: 'row',
-        flex: 1
-    },
-    formContainer: {
-        flex: 1
-    },
-    servicesSection: {
-        marginBottom: 10
-    },
-    servicesContent: {
-        flexDirection: 'row'
-    },
-    servicesCheckBoxContainer: {
-        flex: 1
-    }
-}
+export default connect(mapStateToProps, { onAddressSubmit })(SelectAddress);

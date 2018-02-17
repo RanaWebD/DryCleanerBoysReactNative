@@ -3,6 +3,7 @@ import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import ListItem from './common/ListItem';
 import Footer from './common/Footer';
+import styles from '../../css/PriceListCSS';
 
 class WomenPriceListTab extends PureComponent {
     render() {
@@ -25,8 +26,3 @@ const mapStateToProps = ({ WomenLibrary }) => {
 
 export default connect(mapStateToProps)(WomenPriceListTab);
 
-const styles = {
-    container: {
-        flex: 1
-    }
-};

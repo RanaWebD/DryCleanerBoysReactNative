@@ -3,6 +3,7 @@ import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import ListItem from './common/ListItem';
 import Footer from './common/Footer';
+import styles from '../../css/PriceListCSS';
 
 class CharakhListTab extends PureComponent {
     render() {
@@ -24,11 +25,3 @@ const mapStateToProps = ({ CharakhLibrary }) => {
 };
 
 export default connect(mapStateToProps)(CharakhListTab);
-
-const styles = {
-    container: {
-        flex: 1,
-        paddingTop: 15,
-        backgroundColor: '#fff',
-    }
-};

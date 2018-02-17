@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import ButtonContainer from '../common/ButtonContainer';
-import { View, Button, TextInput } from 'react-native';
+import { View, ScrollView, Button } from 'react-native';
 import { FormLabel, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { verifyOtp } from '../actions';
+import ButtonContainer from '../common/ButtonContainer';
+import styles from '../css/ConfirmOtpCSS';
 
 class ConformOtp extends Component {
     constructor(props) {
@@ -13,28 +14,15 @@ class ConformOtp extends Component {
     }
 
     componentWillMount() {
-        const address = this.props.Address;
+        const { address } = this.props.Address;
         const time = this.props.Time;
         const QandP = this.props.PriceListFooterData;
 
-        const name = address.name;
-        const number = address.number;
-        const add = address.address;
-        const state = address.state;
-        const pincode = address.pincode;
-        const quantity = QandP.totalQuantity;
-        const price = QandP.totalPrice;
-        const pickupDate = time.pickupDate;
-        const pickupDay = time.pickupDay;
-        const pickupTime = time.pickupTime;
-        const deliveryDate = time.deliveryDate;
-        const deliveryDay = time.deliveryDay;
-        const deliveryTime = time.deliveryTime;
-        const iron = address.IroningService;
-        const wash = address.WashingService;
-        const laundry = address.LaundryService;
-        const dryClean = address.DryCleanService;
+        const { name, number, add, state, pincode, iron, wash, laundry, dryClean } = address;
+        const { quantity, price } = QandP;
+        const { pickupDate, pickupDay, pickupTime, deliveryDate, deliveryDay, deliveryTime } = time;
 
+        //Combine all things together
         let services = '';
         let totalQuantity = '';
         let totalPrice = '';
@@ -52,13 +40,13 @@ class ConformOtp extends Component {
         }
 
 
-        let data = {
+        const data = {
             "sender": "SOCKET",
             "route": "4",
             "country": "91",
             "sms": [
                 {
-                    "message": name + services + ' Contect no: ' + number + totalQuantity + totalPrice + fullAddress + fullTime,
+                    "message": name + services + ' Contact no: ' + number + totalQuantity + totalPrice + fullAddress + fullTime,
                     "to": [
                         number,
                     ]
@@ -74,18 +62,36 @@ class ConformOtp extends Component {
 
 
     onConfirm() {
+        let otpVerifyStatus = this.props.otpVerifyStatus;
         //Action
         this.props.verifyOtp(this.state);
-        //Send function as a props
-        this.props.onOtpComfirm();
+        //API response take some second to response so that we used setTimeout
+        //Redirect the page if API response is 200
+        switch (otpVerifyStatus) {
+            case 'otp_verified':
+                //Redirect page to an another page
+                this.props.onOtpComfirm();
+                break;
+            case 'invalid_mobile':
+                alert('Invalid number type format go back and check!!');
+                break;
+            case 'mobile_not_found':
+                alert('Number not found go back and check your number!!');
+                break;
+            case 'otp_not_verified':
+                alert('Wrong OTP!!');
+                break;
+        }
     }
 
     render() {
         const { container, labelStyle, inputStyle } = styles;
         return (
             <View style={container}>
-                <FormLabel labelStyle={labelStyle}>W R I T E  OTP</FormLabel>
-                <FormInput onChangeText={OTP => { this.setState({ OTP }); }} inputStyle={inputStyle} />
+                <ScrollView>
+                    <FormLabel labelStyle={labelStyle}>W R I T E  OTP</FormLabel>
+                    <FormInput onChangeText={OTP => { this.setState({ OTP }); }} inputStyle={inputStyle} />
+                </ScrollView>
                 <ButtonContainer>
                     <Button
                         title='C O N F I R M'
@@ -98,23 +104,9 @@ class ConformOtp extends Component {
     }
 }
 
-function mapStateToProps({ Time, Address, PriceListFooterData }) {
-    return { Time, Address, PriceListFooterData };
+function mapStateToProps({ Time, Address, PriceListFooterData, otpVerifyStatus }) {
+    return { Time, Address, PriceListFooterData, otpVerifyStatus };
 }
 
 export default connect(mapStateToProps, { verifyOtp })(ConformOtp);
 
-const styles = {
-    container: {
-        flex: 1,
-        marginTop: 30
-    },
-    labelStyle: {
-        textAlign: 'center',
-        fontSize: 20
-    },
-    inputStyle: {
-        textAlign: 'center',
-        fontSize: 20
-    }
-}

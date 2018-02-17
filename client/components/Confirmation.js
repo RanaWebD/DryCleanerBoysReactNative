@@ -1,76 +1,113 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import Card from '../common/Card';
 import ButtonContainer from '../common/ButtonContainer';
+import Card from '../common/Card';
+import styles from '../css/ConfirmationCSS';
 
 class Confirmation extends Component {
+
+    text() {
+        //Remove duplicate objects into the SelectedItem Array
+        if (this.props.SelectedItem.filter !== undefined) {
+            const arr = this.props.SelectedItem.filter((thing, index, self) =>
+                index === self.findIndex((t) => (
+                    t.title === thing.title
+                ))
+            );
+
+            return arr.map(e => {
+                return (
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                        <View style={{ flexDirection: 'row', flex: 1 }}>
+                            <Text>{e.title}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'center' }}>
+                            <Text>{e.itmeTotalQuantity}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'center' }}>
+                            <Text>{e.itmeTotalAmount}</Text>
+                        </View>
+                    </View>
+                );
+            });
+        }
+        return;
+    }
+
     render() {
-        const add = this.props.Address;
+        const { address } = this.props.Address;
         const time = this.props.Time;
-        const totalPrice = this.props.PriceListFooterData.totalPrice;
+        const { totalPrice } = this.props.PriceListFooterData;
         const quantity = this.props.PriceListFooterData.totalQuantity;
 
-        const { firstCardSection, secondCardSection, thirdCardSection, contentBoxLeft, contentBoxRight, title, pickupDayDateContent, deliveryDayDateContent, priceAndQuantityContent, servicesContent } = styles;
+        const { firstCardSection, cardSection, contentBoxLeft, content, contentBoxRight, title, pickupDayDateContent, deliveryDayDateContent, priceAndQuantityContent, servicesContent } = styles;
         return (
             <View style={{ flex: 1 }}>
-                <Card>
-                    <View style={firstCardSection}>
-                        <View style={contentBoxLeft}>
-                            <View>
-                                <Text style={title}>Name:</Text>
-                                <Text>{add.name}</Text>
-                            </View>
-                            <View>
-                                <Text style={title}>Quantity</Text>
-                                <Text>{quantity}</Text>
-                            </View>
-                            <View>
-                                <Text style={title}>Pickup Time:</Text>
-                                <View style={pickupDayDateContent}>
-                                    <Text>{time.pickupDay}</Text>
-                                    <Text>{time.pickupDate}</Text>
+                <ScrollView >
+                    <Card>
+                        <View style={firstCardSection}>
+                            <View style={contentBoxLeft}>
+                                <View style={content}>
+                                    <Text style={title}>Name: </Text>
+                                    <Text >{address.name}</Text>
                                 </View>
-                                <Text>{time.pickupTime}</Text>
-                            </View>
-                        </View>
-                        <View style={contentBoxRight}>
-                            <View>
-                                <Text style={title}>Number:</Text>
-                                <Text>{add.number}</Text>
-                            </View>
-                            <View style={priceAndQuantityContent}>
-                                <Text style={title}>Price</Text>
-                                <Text>{totalPrice}</Text>
-                            </View>
-                            <View>
-                                <Text style={title}>Delivery Time:</Text>
-                                <View style={deliveryDayDateContent}>
-                                    <Text>{time.deliveryDay}</Text>
-                                    <Text>{time.deliveryDate}</Text>
+                                <View style={content}>
+                                    <Text style={title}>Quantity: </Text>
+                                    <Text>{quantity}</Text>
                                 </View>
-                                <Text>{time.deliveryTime}</Text>
+                                <View>
+                                    <Text style={title}>Pickup Time:</Text>
+                                    <View style={pickupDayDateContent}>
+                                        <Text>{time.pickupDay}</Text>
+                                        <Text>{time.pickupDate}</Text>
+                                    </View>
+                                    <Text>{time.pickupTime}</Text>
+                                </View>
+                            </View>
+                            <View style={contentBoxRight}>
+                                <View style={content}>
+                                    <Text style={title}>Number: </Text>
+                                    <Text>{address.number}</Text>
+                                </View>
+                                <View style={content}>
+                                    <Text style={title}>Price: </Text>
+                                    <Text>{totalPrice}</Text>
+                                </View>
+                                <View>
+                                    <Text style={title}>Delivery Time:</Text>
+                                    <View style={deliveryDayDateContent}>
+                                        <Text>{time.deliveryDay}</Text>
+                                        <Text>{time.deliveryDate}</Text>
+                                    </View>
+                                    <Text>{time.deliveryTime}</Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
 
-                    <View style={secondCardSection}>
-                        <Text style={title}>Address:</Text>
-                        <Text>{add.address}</Text>
-                        <Text>{add.state}</Text>
-                        <Text>{add.pincode}</Text>
-                    </View>
-                    <View style={thirdCardSection}>
-                        <Text style={title}>Services:</Text>
-                        <View style={servicesContent}>
-                            <Text>{add.DryCleanService}</Text>
-                            <Text>{add.LaundryService}</Text>
-                            <Text>{add.WashingService}</Text>
-                            <Text>{add.IroningService}</Text>
+                        <View style={cardSection}>
+                            <Text style={title}>Address:</Text>
+                            <Text>{address.add}</Text>
+                            <Text>{address.state}</Text>
+                            <Text>{address.pincode}</Text>
                         </View>
-                    </View>
-                </Card>
-
+                        <View style={cardSection}>
+                            <Text style={title}>Services:</Text>
+                            <View style={servicesContent}>
+                                <Text>{address.DryCleanService}</Text>
+                                <Text>{address.LaundryService}</Text>
+                                <Text>{address.WashingService}</Text>
+                                <Text>{address.IroningService}</Text>
+                            </View>
+                        </View>
+                        <View style={cardSection}>
+                            <Text style={title}>Selected Items</Text>
+                            <View style={{ marginTop: 5 }}>
+                                {this.text()}
+                            </View>
+                        </View>
+                    </Card>
+                </ScrollView>
                 <ButtonContainer>
                     <Button
                         title="H O M E   P A G E"
@@ -78,48 +115,13 @@ class Confirmation extends Component {
                         onPress={() => this.props.onOrderDetails()}
                     />
                 </ButtonContainer>
-            </View >
+            </View>
         );
     }
 }
 
-function mapStateToProps({ Time, Address, PriceListFooterData }) {
-    return { Time, Address, PriceListFooterData };
+function mapStateToProps({ Time, Address, PriceListFooterData, SelectedItem }) {
+    return { Time, Address, PriceListFooterData, SelectedItem };
 }
 
 export default connect(mapStateToProps)(Confirmation);
-
-const styles = {
-    firstCardSection: {
-        flexDirection: 'row',
-        padding: 5
-    },
-    secondCardSection: {
-        padding: 5
-    },
-    thirdCardSection: {
-        padding: 5
-    },
-    priceAndQuantityContent: {
-    },
-    contentBoxLeft: {
-        flex: 1
-    },
-    contentBoxRight: {
-        flex: 1
-    },
-    title: {
-        color: 'gray',
-        fontSize: 15
-    },
-    pickupDayDateContent: {
-        flexDirection: 'row'
-    },
-    deliveryDayDateContent: {
-        flexDirection: 'row'
-    },
-    servicesContent: {
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-    }
-};

@@ -10,7 +10,31 @@ const timeReducer = (state = {}, actions) => {
 }
 const addressReducer = (state = {}, actions) => {
     switch (actions.type) {
-        case 'ADDRESS':
+        case 'OTP_SEND_RESPONSE':
+            return actions.payload;
+    }
+    return state;
+};
+
+const selectedOfferReducer = (state = 'none', action) => {
+    switch (action.type) {
+        case 'SELECTED_OFFER':
+            return action.payload;
+    }
+    return state;
+};
+
+const selectedItemReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'SELECTED_ITEM':
+            return action.payload;
+    }
+    return state;
+};
+
+const otpVerifyStatusReducer = (state = {}, actions) => {
+    switch (actions.type) {
+        case 'OTP_VERIFY_RESPONSE':
             return actions.payload;
     }
     return state;
@@ -22,12 +46,15 @@ const PriceListFooterDataReducer = (state = {}, actions) => {
             return actions.payload;
     }
     return state;
-}
+};
 
 export default combineReducers({
     Time: timeReducer,
     Address: addressReducer,
     PriceListFooterData: PriceListFooterDataReducer,
+    otpVerifyStatus: otpVerifyStatusReducer,
+    selectedOffer: selectedOfferReducer,
+    SelectedItem: selectedItemReducer,
     MenLibrary: MenLibrary,
     WomenLibrary: WomenLibrary,
     HouseHoldLibrary: HouseHoldLibrary,

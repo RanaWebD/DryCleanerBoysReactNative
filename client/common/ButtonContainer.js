@@ -11,7 +11,6 @@ const ButtonContainer = (props) => {
 
 const styles = {
     containerStyle: {
-        flex: 1,
         justifyContent: 'flex-end',
         marginBottom: 10,
         marginRight: 5,

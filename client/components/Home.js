@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, Image, ScrollView, Linking, Button } from 'react-native';
+import { connect } from 'react-redux';
+import selectedOffer from '../actions/';
 import Card from '../common/Card';
+import styles from '../css/homeCSS';
 
 class MainScreen extends Component {
     constructor(props) {
@@ -9,8 +12,70 @@ class MainScreen extends Component {
         this.state = { washAndFold: false, washAndIron: false, dryClean: false, laundry: false };
     }
 
+    offerJXS() {
+        const { offerContainer, imageBackground, offerContent, offerHeading, offerItem, offerPriceContent, offerPriceText, offerPriceAmount, validityText } = styles;
+        const data = [
+            {
+                url: '../assets/images/landscape-1427642388-ironing-steam.jpg',
+                category: 'I R O N I N G',
+                quantity: '400 Clothes',
+                price: 999,
+                validity: '3 months'
+            },
+            {
+                url: '../assets/images/shutterstock_526101427.jpg',
+                category: 'I R O N I N G',
+                quantity: '200 Clothes',
+                price: 599,
+                validity: '2 months'
+            },
+            {
+                url: '../assets/images/ironing.jpg',
+                category: 'I R O N I N G',
+                quantity: '100 clothes',
+                price: 399,
+                validity: '1 months'
+            },
+            {
+                url: '../assets/images/pexels-photo-212269.jpeg',
+                category: 'D r y  C l e a n',
+                quantity: '3 Blanket',
+                price: 549
+            }
+        ];
+
+        return data.map((e, index) => {
+            return (
+                <TouchableOpacity
+                    key={index}
+                    style={{ marginBottom: 8 }}
+                    onPress={() => { }}
+                >
+                    <Card>
+                        <View style={offerContainer}>
+                            <ImageBackground
+                                style={imageBackground}
+                                source={require('../assets/images/903194c73f76c9ad83c90079c985ffd3.jpg')}
+                            >
+                                <View style={offerContent}>
+                                    <Text style={offerHeading}>{e.category}</Text>
+                                    <Text style={offerItem}>{e.quantity}</Text>
+                                    <View style={offerPriceContent}>
+                                        <Text style={offerPriceText}>only in</Text>
+                                        <Text style={offerPriceAmount}>{e.price}</Text>
+                                    </View>
+                                    <Text style={validityText}>{e.validity}</Text>
+                                </View>
+                            </ImageBackground>
+                        </View>
+                    </Card>
+                </TouchableOpacity>
+            );
+        });
+    }
+
     render() {
-        const { header, offerContainer, imageBackground, offerContent, offerHeading, offerItem, offerPriceContent, offerPriceText, offerPriceAmount, headerText, bookNowBtn, buttonStyle, footer, footerItem, footerText } = styles;
+        const { header, offerContainer, imageBackground, offerContent, offerHeading, offerItem, headerText, bookNowBtn, footer, footerItem, footerText } = styles;
         return (
             <View style={{ flex: 1 }}>
                 <View style={header}>
@@ -28,55 +93,16 @@ class MainScreen extends Component {
                         <View style={offerContainer}>
                             <ImageBackground
                                 style={imageBackground}
-                                source={{ uri: 'https://static.pexels.com/photos/212269/pexels-photo-212269.jpeg' }}
+                                source={require('../assets/images/903194c73f76c9ad83c90079c985ffd3.jpg')}
                             >
                                 <View style={offerContent}>
-                                    <Text style={offerHeading}>D r y  C l e a n</Text>
-                                    <Text style={offerItem}>3 Blanket</Text>
-                                    <View style={offerPriceContent}>
-                                        <Text style={offerPriceText}>only in</Text>
-                                        <Text style={offerPriceAmount}>549</Text>
-                                    </View>
+                                    <Text style={offerHeading}>I R O N I N G  T R I A L</Text>
+                                    <Text style={offerItem}>4 Clothes</Text>
                                 </View>
                             </ImageBackground>
                         </View>
                     </Card>
-                    <Card>
-                        <View style={offerContainer}>
-                            <ImageBackground
-                                style={imageBackground}
-                                source={{ uri: 'https://static.pexels.com/photos/212269/pexels-photo-212269.jpeg' }}
-                            >
-                                <View style={offerContent}>
-                                    <Text style={offerHeading}>D r y  C l e a n</Text>
-                                    <Text style={offerItem}>3 Blanket</Text>
-                                    <View style={offerPriceContent}>
-                                        <Text style={offerPriceText}>only in</Text>
-                                        <Text style={offerPriceAmount}>549</Text>
-                                    </View>
-                                </View>
-                            </ImageBackground>
-                        </View>
-                    </Card>
-                    <Card>
-                        <View style={offerContainer}>
-                            <ImageBackground
-                                style={imageBackground}
-                                source={{ uri: 'https://static.pexels.com/photos/212269/pexels-photo-212269.jpeg' }}
-                            >
-                                <View style={offerContent}>
-                                    <Text style={offerHeading}>D r y  C l e a n</Text>
-                                    <Text style={offerItem}>3 Blanket</Text>
-                                    <View style={offerPriceContent}>
-                                        <Text style={offerPriceText}>only in</Text>
-                                        <Text style={offerPriceAmount}>549</Text>
-                                    </View>
-                                </View>
-                            </ImageBackground>
-                        </View>
-                    </Card>
-
-
+                    {this.offerJXS()}
                 </ScrollView>
                 <View style={footer}>
                     {/* <TouchableOpacity
@@ -109,90 +135,9 @@ class MainScreen extends Component {
                         <Text style={footerText}>WebSite</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </View >
         );
     }
 }
 
-export default MainScreen;
-
-const styles = {
-    header: {
-        height: 80,
-        backgroundColor: '#04A2E1',
-        justifyContent: 'center',
-        alignItems: 'center',
-        shadowOpacity: 0.75,
-        shadowRadius: 5,
-        shadowColor: 'red',
-        shadowOffset: { height: 0, width: 0 },
-    },
-    headerText: {
-        fontWeight: 'bold',
-        fontSize: 20,
-        color: 'white',
-        marginTop: 20
-    },
-    offerContainer: {
-        height: 150
-    },
-    imageBackground: {
-        backgroundColor: '#ccc',
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        justifyContent: 'center'
-    },
-    offerContent: {
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.2)'
-    },
-    offerHeading: {
-        fontSize: 30,
-        marginBottom: 15,
-        color: 'white'
-    },
-    offerItem: {
-        fontSize: 20,
-        color: 'white',
-        marginBottom: 10
-    },
-    offerPriceContent: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-    },
-    offerPriceText: {
-        color: 'gray',
-        width: 50,
-        alignItems: 'space-between'
-    },
-    offerPriceAmount: {
-        fontSize: 20
-    },
-    content: {
-        padding: 10
-    },
-    footer: {
-        height: 50,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        backgroundColor: '#04A2E1'
-    },
-    footerItem: {
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    footerText: {
-        color: 'white'
-    },
-    bookNowBtn: {
-        padding: 10
-    },
-    buttonStyle: {
-        backgroundColor: '#04A2E1',
-        padding: 10,
-        alignItems: 'center',
-    }
-};
-
+export default connect(null, { selectedOffer })(MainScreen);

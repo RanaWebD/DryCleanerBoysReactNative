@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ButtonContainer from '../common/ButtonContainer';
 import { onTimeSubmit } from '../actions/index';
+import styles from '../css/SelectTimeCSS';
 
 class SelectTime extends Component {
     static navigationOptions = {
@@ -48,8 +49,16 @@ class SelectTime extends Component {
             secondPickupTimeCardToggle3: false,
             secondPickupTimeCardToggle4: false,
             //disable elements
-            disableTime: false,
-            disableTimeStyle: null,
+            disableTime1: false,
+            disableTime2: false,
+            disableTime3: false,
+            disableTime4: false,
+            disableTime5: false,
+            disableTimeStyle1: null,
+            disableTimeStyle2: null,
+            disableTimeStyle3: null,
+            disableTimeStyle4: null,
+            disableTimeStyle5: null,
             //Selected elements
             selectedPickupDate: null,
             selectedPickupDay: null,
@@ -70,11 +79,11 @@ class SelectTime extends Component {
         this.createDaysArray(day);
 
         //Disable the time before 1 hour of schedule time and change the style of it.
-        if (hours >= 8) { this.setState({ disableTime: true, disableTimeStyle: { color: 'lightgray' } }); }
-        if (hours >= 10) { this.setState({ disableTime: true, disableTimeStyle: { color: 'lightgray' } }); }
-        if (hours >= 1) { this.setState({ disableTime: true, disableTimeStyle: { color: 'lightgray' } }); }
-        if (hours >= 3) { this.setState({ disableTime: true, disableTimeStyle: { color: 'lightgray' } }); }
-        if (hours >= 5) { this.setState({ disableTime: true, disableTimeStyle: { color: 'lightgray' } }); }
+        if (hours >= 8) { this.setState({ disableTime1: true, disableTimeStyle1: { color: 'lightgray' } }); }
+        if (hours >= 10) { this.setState({ disableTime2: true, disableTimeStyle2: { color: 'lightgray' } }); }
+        if (hours >= 13) { this.setState({ disableTime3: true, disableTimeStyle3: { color: 'lightgray' } }); }
+        if (hours >= 15) { this.setState({ disableTime4: true, disableTimeStyle4: { color: 'lightgray' } }); }
+        if (hours >= 17) { this.setState({ disableTime5: true, disableTimeStyle5: { color: 'lightgray' } }); }
     }
 
     //Change component states usen user press on Calendar
@@ -124,6 +133,149 @@ class SelectTime extends Component {
             case 6: this.setState({ selectedDeliveryDate: currentDate + 4, selectedDeliveryDay: daysArray[4] }); break;
             case 7: this.setState({ selectedDeliveryDate: currentDate + 5, selectedDeliveryDay: daysArray[5] }); break;
         }
+    }
+
+    firstPikupTimeRow() {
+        const dataArr = [
+            {
+                pickupFirstRowtime: '09-11',
+                pickupSecondRowtime: '09-11',
+                disabled: this.state.disableTime1,
+                toggleStyle: this.state.pickupTimeCardToggle0,
+                disableStyle: this.state.disableTimeStyle1,
+                text: '09 AM - 11 AM'
+            },
+            {
+                pickupFirstRowtime: '11-01',
+                pickupSecondRowtime: '11-01',
+                disabled: this.state.disableTime2,
+                toggleStyle: this.state.pickupTimeCardToggle1,
+                disableStyle: this.state.disableTimeStyle2,
+                text: '11 AM - 01 PM'
+            },
+            {
+                pickupFirstRowtime: '02-04',
+                pickupSecondRowtime: '02-04',
+                disabled: this.state.disableTime3,
+                toggleStyle: this.state.pickupTimeCardToggle2,
+                disableStyle: this.state.disableTimeStyle3,
+                text: '02 PM - 04 PM'
+            },
+            {
+                pickupFirstRowtime: '04-06',
+                pickupSecondRowtime: '04-06',
+                disabled: this.state.disableTime4,
+                toggleStyle: this.state.pickupTimeCardToggle3,
+                disableStyle: this.state.disableTimeStyle4,
+                text: '04 PM - 06 PM'
+            },
+            {
+                pickupFirstRowtime: '06-08',
+                pickupSecondRowtime: '06-08',
+                disabled: this.state.disableTime5,
+                toggleStyle: this.state.pickupTimeCardToggle4,
+                disableStyle: this.state.disableTimeStyle5,
+                text: '06 PM - 08 PM'
+            }
+        ];
+
+        return dataArr.map((e, index) => {
+            return (
+                <TouchableOpacity
+                    disabled={e.disabled}
+                    key={index}
+                    onPress={() => { this.onTimePress(e.pickupFirstRowtime); }}
+                    style={[styles.timeCard, e.toggleStyle && styles.TimeCardAlt]}
+                >
+                    <Text style={[styles.timeCardText, e.disableStyle]}>{e.text}</Text>
+                </TouchableOpacity>
+            );
+        });
+    }
+
+    secondPikupTimeRow() {
+        let dataArr = [
+            {
+                time: '09to11',
+                toggleStyle: this.state.secondPickupTimeCardToggle0,
+                text: '09 AM - 11 AM'
+            },
+            {
+                time: '11to01',
+                toggleStyle: this.state.secondPickupTimeCardToggle1,
+                text: '11 AM - 01 PM'
+            },
+            {
+                time: '02to04',
+                toggleStyle: this.state.secondPickupTimeCardToggle2,
+                text: '02 PM - 04 PM'
+            },
+            {
+                time: '04to06',
+                toggleStyle: this.state.secondPickupTimeCardToggle3,
+                text: '04 PM - 06 PM'
+            },
+            {
+                time: '06to08',
+                toggleStyle: this.state.secondPickupTimeCardToggle4,
+                text: '06 PM - 08 PM'
+            }
+        ];
+
+        return dataArr.map((e, index) => {
+            return (
+                <TouchableOpacity
+                    key={index}
+                    onPress={() => { this.onTimePress(e.time); }}
+                    style={[styles.timeCard, e.toggleStyle && styles.TimeCardAlt]}
+                >
+                    <Text style={styles.timeCardText}>{e.text}</Text>
+                </TouchableOpacity>
+            );
+        });
+    }
+
+
+    deliveryTimeRow() {
+        let dataArr = [
+            {
+                time: '09d11',
+                toggleStyle: this.state.deliveryTimeCardToggle0,
+                text: '09 AM - 11 AM'
+            },
+            {
+                time: '11d01',
+                toggleStyle: this.state.deliveryTimeCardToggle1,
+                text: '11 AM - 01 PM'
+            },
+            {
+                time: '02d04',
+                toggleStyle: this.state.deliveryTimeCardToggle2,
+                text: '02 PM - 04 PM'
+            },
+            {
+                time: '04d06',
+                toggleStyle: this.state.deliveryTimeCardToggle3,
+                text: '04 PM - 06 PM'
+            },
+            {
+                time: '06d08',
+                toggleStyle: this.state.deliveryTimeCardToggle4,
+                text: '06 PM - 08 PM'
+            }
+        ];
+
+        return dataArr.map((e, index) => {
+            return (
+                <TouchableOpacity
+                    key={index}
+                    onPress={() => { this.onTimePress(e.time); }}
+                    style={[styles.timeCard, e.toggleStyle && styles.TimeCardAlt]}
+                >
+                    <Text style={styles.timeCardText}>{e.text}</Text>
+                </TouchableOpacity>
+            );
+        });
     }
 
     onTimePress(time) {
@@ -179,7 +331,6 @@ class SelectTime extends Component {
                     selectedPickupTime: '06PM-08PM'
                 });
                 break;
-            default: case null: this.setState({ pickupTime: 'Time not selected' });
         }
         //Second Time Section
         switch (time) {
@@ -428,256 +579,166 @@ class SelectTime extends Component {
     render() {
         const currentDate = this.state.currentDate;
         const { title, pickupDateSection, pickupCalendersSection, dateCard, day, dateContent, date, checkIconContent,
-            checkIconContentAlt, pickupTimeSection, pickupTimeSection1, pickupTimeSection1Alt, timeCard, TimeCardAlt, timeCardText,
-            pickupTimeSection2, pickupTimeSection2Alt, deliverySection, deliveryCalendersSection, deliveryDateAlt, deliveryTimeSection,
-            nextBtnContainer } = styles;
+            checkIconContentAlt, pickupTimeSection, pickupTimeSection1, pickupTimeSection1Alt,
+            pickupTimeSection2, pickupTimeSection2Alt, deliverySection, deliveryCalendersSection, deliveryDateAlt, deliveryTimeSection
+        } = styles;
         return (
             <View style={{ flex: 1 }}>
-                {/* Pickup Date     */}
-                <View style={pickupDateSection}>
-                    <Text style={title}>Pickup</Text>
-                    <View style={pickupCalendersSection}>
-                        <ScrollView
-                            horizontal
-                        >
-                            <TouchableOpacity
-                                onPress={() => { this.onCalendarPress(0, 0); }}
-                                style={dateCard}
-                            >
-                                <Text style={day}>{this.state.daysArray[0]}</Text>
-                                <View style={dateContent}>
-                                    <Text style={date}>{currentDate}</Text>
-                                    <View style={[checkIconContent, this.state.checkIconContentToggle0 && checkIconContentAlt]}>
-                                        <Icon name="check-circle" size={20} color="whitesmoke" />
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                onPress={() => { this.onCalendarPress(1, 1); }}
-                                style={dateCard}
-                            >
-                                <Text style={day}>{this.state.daysArray[1]}</Text>
-                                <View style={dateContent}>
-                                    <Text style={date}>{currentDate + 1}</Text>
-                                    <View style={[checkIconContent, this.state.checkIconContentToggle1 && checkIconContentAlt]}>
-                                        <Icon name="check-circle" size={20} color="whitesmoke" />
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                onPress={() => { this.onCalendarPress(1, 2); }}
-                                style={dateCard}
-                            >
-                                <Text style={day}>{this.state.daysArray[2]}</Text>
-                                <View style={dateContent}>
-                                    <Text style={date}>{currentDate + 2}</Text>
-                                    <View style={[checkIconContent, this.state.checkIconContentToggle2 && checkIconContentAlt]}>
-                                        <Icon name="check-circle" size={20} color="whitesmoke" />
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                onPress={() => { this.onCalendarPress(1, 3); }}
-                                style={dateCard}
-                            >
-                                <Text style={day}>{this.state.daysArray[3]}</Text>
-                                <View style={dateContent}>
-                                    <Text style={date}>{currentDate + 3}</Text>
-                                    <View style={[checkIconContent, this.state.checkIconContentToggle3 && checkIconContentAlt]}>
-                                        <Icon name="check-circle" size={20} color="whitesmoke" />
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                        </ScrollView>
-                    </View>
-                    {/* Pickup Time */}
-                    <View style={pickupTimeSection}>
-                        <View style={[pickupTimeSection1, this.state.firstTimeContainerToggle && pickupTimeSection1Alt]}>
+                <ScrollView>
+                    {/* Pickup Date     */}
+                    <View style={pickupDateSection}>
+                        <Text style={title}>Pickup</Text>
+                        <View style={pickupCalendersSection}>
                             <ScrollView
                                 horizontal
-                                contentContainerStyle={{ alignItems: 'center' }}
                             >
                                 <TouchableOpacity
-                                    disabled={this.state.disableTime}
-                                    onPress={() => { this.onTimePress('09-11'); }}
-                                    style={[timeCard, this.state.pickupTimeCardToggle0 && TimeCardAlt]}
+                                    onPress={() => { this.onCalendarPress(0, 0); }}
+                                    style={dateCard}
                                 >
-                                    <Text style={[timeCardText, this.state.disableTimeStyle]}>09 AM - 11 AM</Text>
+                                    <Text style={day}>{this.state.daysArray[0]}</Text>
+                                    <View style={dateContent}>
+                                        <Text style={date}>{currentDate}</Text>
+                                        <View style={[checkIconContent, this.state.checkIconContentToggle0 && checkIconContentAlt]}>
+                                            <Icon name="check-circle" size={20} color="whitesmoke" />
+                                        </View>
+                                    </View>
                                 </TouchableOpacity>
+
                                 <TouchableOpacity
-                                    disabled={this.state.disableTime}
-                                    onPress={() => { this.onTimePress('11-01'); }}
-                                    style={[timeCard, this.state.pickupTimeCardToggle1 && TimeCardAlt]}
+                                    onPress={() => { this.onCalendarPress(1, 1); }}
+                                    style={dateCard}
                                 >
-                                    <Text style={[timeCardText, this.state.disableTimeStyle]}>11 AM - 01 PM</Text>
+                                    <Text style={day}>{this.state.daysArray[1]}</Text>
+                                    <View style={dateContent}>
+                                        <Text style={date}>{currentDate + 1}</Text>
+                                        <View style={[checkIconContent, this.state.checkIconContentToggle1 && checkIconContentAlt]}>
+                                            <Icon name="check-circle" size={20} color="whitesmoke" />
+                                        </View>
+                                    </View>
                                 </TouchableOpacity>
+
                                 <TouchableOpacity
-                                    disabled={this.state.disableTime}
-                                    onPress={() => { this.onTimePress('02-04'); }}
-                                    style={[timeCard, this.state.pickupTimeCardToggle2 && TimeCardAlt]}
+                                    onPress={() => { this.onCalendarPress(1, 2); }}
+                                    style={dateCard}
                                 >
-                                    <Text style={[timeCardText, this.state.disableTimeStyle]}>02 PM - 04 PM</Text>
+                                    <Text style={day}>{this.state.daysArray[2]}</Text>
+                                    <View style={dateContent}>
+                                        <Text style={date}>{currentDate + 2}</Text>
+                                        <View style={[checkIconContent, this.state.checkIconContentToggle2 && checkIconContentAlt]}>
+                                            <Icon name="check-circle" size={20} color="whitesmoke" />
+                                        </View>
+                                    </View>
                                 </TouchableOpacity>
+
                                 <TouchableOpacity
-                                    disabled={this.state.disableTime}
-                                    onPress={() => { this.onTimePress('04-06'); }}
-                                    style={[timeCard, this.state.pickupTimeCardToggle3 && TimeCardAlt]}
+                                    onPress={() => { this.onCalendarPress(1, 3); }}
+                                    style={dateCard}
                                 >
-                                    <Text style={[timeCardText, this.state.disableTimeStyle]}>04 PM - 06 PM</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    disabled={this.state.disableTime}
-                                    onPress={() => { this.onTimePress('06-08'); }}
-                                    style={[timeCard, this.state.pickupTimeCardToggle4 && TimeCardAlt]}
-                                >
-                                    <Text style={[timeCardText, this.state.disableTimeStyle]}>06 PM - 08 PM</Text>
+                                    <Text style={day}>{this.state.daysArray[3]}</Text>
+                                    <View style={dateContent}>
+                                        <Text style={date}>{currentDate + 3}</Text>
+                                        <View style={[checkIconContent, this.state.checkIconContentToggle3 && checkIconContentAlt]}>
+                                            <Icon name="check-circle" size={20} color="whitesmoke" />
+                                        </View>
+                                    </View>
                                 </TouchableOpacity>
                             </ScrollView>
                         </View>
-                        <View style={[pickupTimeSection2, this.state.secondTimeContainerToggle && pickupTimeSection2Alt]}>
-                            <ScrollView
-                                horizontal
-                                contentContainerStyle={{ alignItems: 'center' }}
-                            >
-                                <TouchableOpacity
-                                    onPress={() => { this.onTimePress('09to11'); }}
-                                    style={[timeCard, this.state.secondPickupTimeCardToggle0 && TimeCardAlt]}
+                        {/* Pickup Time */}
+                        <View style={pickupTimeSection}>
+                            <View style={[pickupTimeSection1, this.state.firstTimeContainerToggle && pickupTimeSection1Alt]}>
+                                <ScrollView
+                                    horizontal
+                                    contentContainerStyle={{ alignItems: 'center' }}
                                 >
-                                    <Text style={timeCardText}>09 AM - 11 AM</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => { this.onTimePress('11to01'); }}
-                                    style={[timeCard, this.state.secondPickupTimeCardToggle1 && TimeCardAlt]}
+                                    {this.firstPikupTimeRow()}
+                                </ScrollView>
+                            </View>
+                            <View style={[pickupTimeSection2, this.state.secondTimeContainerToggle && pickupTimeSection2Alt]}>
+                                <ScrollView
+                                    horizontal
+                                    contentContainerStyle={{ alignItems: 'center' }}
                                 >
-                                    <Text style={timeCardText}>11 AM - 01 PM</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => { this.onTimePress('02to04'); }}
-                                    style={[timeCard, this.state.secondPickupTimeCardToggle2 && TimeCardAlt]}
-                                >
-                                    <Text style={timeCardText}>02 PM - 04 PM</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => { this.onTimePress('04to06'); }}
-                                    style={[timeCard, this.state.secondPickupTimeCardToggle3 && TimeCardAlt]}
-                                >
-                                    <Text style={timeCardText}>04 PM - 06 PM</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => { this.onTimePress('06to08'); }}
-                                    style={[timeCard, this.state.secondPickupTimeCardToggle4 && TimeCardAlt]}
-                                >
-                                    <Text style={timeCardText}>06 PM - 08 PM</Text>
-                                </TouchableOpacity>
-                            </ScrollView>
+                                    {this.secondPikupTimeRow()}
+                                </ScrollView>
+                            </View>
                         </View>
-                    </View>
-                </View >
-
-                {/* Delivery Date */}
-                < View style={deliverySection} >
-                    <Text style={title}>Delivery</Text>
-                    <View style={deliveryCalendersSection}>
-                        <ScrollView
-                            horizontal
-                        >
-                            <TouchableOpacity
-                                onPress={() => { this.onCalendarPress(null, 4); }}
-                                style={[dateCard, this.state.deliveryDateToggle0 && deliveryDateAlt]}
-                            >
-                                <Text style={day}>{this.state.daysArray[2]}</Text>
-                                <View style={dateContent}>
-                                    <Text style={date}>{currentDate + 2}</Text>
-                                    <View style={[checkIconContent, this.state.checkIconContentToggle4 && checkIconContentAlt]}>
-                                        <Icon name="check-circle" size={20} color="whitesmoke" />
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                onPress={() => { this.onCalendarPress(null, 5); }}
-                                style={[dateCard, this.state.deliveryDateToggle1 && deliveryDateAlt]}
-                            >
-                                <Text style={day}>{this.state.daysArray[3]}</Text>
-                                <View style={dateContent}>
-                                    <Text style={date}>{currentDate + 3}</Text>
-                                    <View style={[checkIconContent, this.state.checkIconContentToggle5 && checkIconContentAlt]}>
-                                        <Icon name="check-circle" size={20} color="whitesmoke" />
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                onPress={() => { this.onCalendarPress(null, 6); }}
-                                style={[dateCard, this.state.deliveryDateToggle2 && deliveryDateAlt]}
-                            >
-                                <Text style={day}>{this.state.daysArray[4]}</Text>
-                                <View style={dateContent}>
-                                    <Text style={date}>{currentDate + 4}</Text>
-                                    <View style={[checkIconContent, this.state.checkIconContentToggle6 && checkIconContentAlt]}>
-                                        <Icon name="check-circle" size={20} color="whitesmoke" />
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                onPress={() => { this.onCalendarPress(null, 7); }}
-                                style={[dateCard, this.state.deliveryDateToggle3 && deliveryDateAlt]}
-                            >
-                                <Text style={day}>{this.state.daysArray[5]}</Text>
-                                <View style={dateContent}>
-                                    <Text style={date}>{currentDate + 5}</Text>
-                                    <View style={[checkIconContent, this.state.checkIconContentToggle7 && checkIconContentAlt]}>
-                                        <Icon name="check-circle" size={20} color="whitesmoke" />
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                        </ScrollView>
                     </View >
-                    {/* Delivery Time */}
-                    < View style={deliveryTimeSection}>
-                        <View>
+
+                    {/* Delivery Date */}
+                    < View style={deliverySection} >
+                        <Text style={title}>Delivery</Text>
+                        <View style={deliveryCalendersSection}>
+                            <ScrollView
+                                horizontal
+                            >
+                                <TouchableOpacity
+                                    onPress={() => { this.onCalendarPress(null, 4); }}
+                                    style={[dateCard, this.state.deliveryDateToggle0 && deliveryDateAlt]}
+                                >
+                                    <Text style={day}>{this.state.daysArray[2]}</Text>
+                                    <View style={dateContent}>
+                                        <Text style={date}>{currentDate + 2}</Text>
+                                        <View style={[checkIconContent, this.state.checkIconContentToggle4 && checkIconContentAlt]}>
+                                            <Icon name="check-circle" size={20} color="whitesmoke" />
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    onPress={() => { this.onCalendarPress(null, 5); }}
+                                    style={[dateCard, this.state.deliveryDateToggle1 && deliveryDateAlt]}
+                                >
+                                    <Text style={day}>{this.state.daysArray[3]}</Text>
+                                    <View style={dateContent}>
+                                        <Text style={date}>{currentDate + 3}</Text>
+                                        <View style={[checkIconContent, this.state.checkIconContentToggle5 && checkIconContentAlt]}>
+                                            <Icon name="check-circle" size={20} color="whitesmoke" />
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    onPress={() => { this.onCalendarPress(null, 6); }}
+                                    style={[dateCard, this.state.deliveryDateToggle2 && deliveryDateAlt]}
+                                >
+                                    <Text style={day}>{this.state.daysArray[4]}</Text>
+                                    <View style={dateContent}>
+                                        <Text style={date}>{currentDate + 4}</Text>
+                                        <View style={[checkIconContent, this.state.checkIconContentToggle6 && checkIconContentAlt]}>
+                                            <Icon name="check-circle" size={20} color="whitesmoke" />
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    onPress={() => { this.onCalendarPress(null, 7); }}
+                                    style={[dateCard, this.state.deliveryDateToggle3 && deliveryDateAlt]}
+                                >
+                                    <Text style={day}>{this.state.daysArray[5]}</Text>
+                                    <View style={dateContent}>
+                                        <Text style={date}>{currentDate + 5}</Text>
+                                        <View style={[checkIconContent, this.state.checkIconContentToggle7 && checkIconContentAlt]}>
+                                            <Icon name="check-circle" size={20} color="whitesmoke" />
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            </ScrollView>
+                        </View >
+
+                        {/* Delivery Time */}
+                        < View style={deliveryTimeSection}>
                             <ScrollView
                                 horizontal
                                 contentContainerStyle={{ alignItems: 'center', backgroundColor: "#04A2E1" }}
                             >
-                                <TouchableOpacity
-                                    onPress={() => { this.onTimePress('09d11'); }}
-                                    style={[timeCard, this.state.deliveryTimeCardToggle0 && TimeCardAlt]}
-                                >
-                                    <Text style={timeCardText}>09 AM - 11 AM</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => { this.onTimePress('11d01'); }}
-                                    style={[timeCard, this.state.deliveryTimeCardToggle1 && TimeCardAlt]}
-                                >
-                                    <Text style={timeCardText}>11 AM - 01 PM</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => { this.onTimePress('02d04'); }}
-                                    style={[timeCard, this.state.deliveryTimeCardToggle2 && TimeCardAlt]}
-                                >
-                                    <Text style={timeCardText}>02 PM - 04 PM</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => { this.onTimePress('04d06'); }}
-                                    style={[timeCard, this.state.deliveryTimeCardToggle3 && TimeCardAlt]}
-                                >
-                                    <Text style={timeCardText}>04 PM - 06 PM</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => { this.onTimePress('06d08'); }}
-                                    style={[timeCard, this.state.deliveryTimeCardToggle4 && TimeCardAlt]}
-                                >
-                                    <Text style={timeCardText}>06 PM - 08 PM</Text>
-                                </TouchableOpacity>
+                                {this.deliveryTimeRow()}
                             </ScrollView>
-                        </View>
+                        </View >
                     </View >
-                </View >
+
+                </ScrollView>
 
                 <ButtonContainer>
                     <Button
@@ -693,99 +754,3 @@ class SelectTime extends Component {
 
 export default connect(null, { onTimeSubmit })(SelectTime);
 
-const styles = {
-    pickupDateSection: {
-        height: 150
-    },
-    pickupCalendersSection: {
-        height: 100, alignItems: 'center'
-    },
-    deliverySection: {
-        height: 100, marginTop: 40
-    },
-    deliveryCalendersSection: {
-        height: 100,
-        marginTop: 10
-    },
-    title: {
-        marginTop: 10,
-        marginBottom: 10,
-        marginRight: 5,
-        fontSize: 15,
-        borderBottomWidth: 1,
-        borderColor: 'lightgray'
-    },
-    dateCard: {
-        height: 150,
-        paddingRight: 15,
-        paddingLeft: 15,
-        alignItems: 'center'
-    },
-    day: {
-        backgroundColor: '#04A2E1',
-        fontSize: 20,
-        color: 'white',
-        width: 100,
-        paddingLeft: 10
-    },
-    dateContent: {
-        position: 'relative',
-        width: 85
-    },
-    date: {
-        backgroundColor: '#33D65B',
-        color: 'white',
-        fontSize: 25,
-        paddingLeft: 10,
-        paddingBottom: 30
-    },
-    checkIconContent: {
-        position: 'absolute',
-        right: 0,
-        bottom: 0,
-        display: 'none',
-        paddingRight: 5,
-        paddingBottom: 5
-    },
-    checkIconContentAlt: {
-        display: 'flex'
-    },
-    pickupTimeSection: {
-        position: 'relative',
-        marginTop: 10
-    },
-    pickupTimeSection1: {
-        alignItems: 'center',
-        position: 'absolute',
-        backgroundColor: '#04A2E1'
-    },
-    pickupTimeSection1Alt: {
-        display: 'none'
-    },
-    pickupTimeSection2: {
-        alignItems: 'center',
-        position: 'absolute',
-        backgroundColor: '#04A2E1'
-    },
-    pickupTimeSection2Alt: {
-        display: 'none'
-    },
-    timeCard: {
-        paddingRight: 19,
-        paddingLeft: 19,
-        paddingTop: 3,
-        paddingBottom: 3
-    },
-    timeCardText: {
-        color: 'white'
-    },
-    deliveryDateAlt: {
-        display: 'none'
-    },
-    TimeCardAlt: {
-        backgroundColor: '#33D65B'
-    },
-    deliveryTimeSection: {
-        position: 'relative', marginTop: 10
-    }
-};

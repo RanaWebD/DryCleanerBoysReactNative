@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
+import styles from '../../../css/FooterCSS';
 
 class Footer extends Component {
 
@@ -38,49 +39,3 @@ const mapStateToProps = ({ PriceListFooterData }) => {
 
 //Connet react component with redux store and action creator with the help of react-redux connect funtion
 export default connect(mapStateToProps)(Footer);
-
-const styles = {
-    footer: {
-        backgroundColor: '#04A2E1',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 50,
-    },
-    footerContentLeft: {
-        flex: 4,
-        flexDirection: 'row',
-        justifyContent: 'center'
-    },
-    footerContentRight: {
-        flex: 1,
-        backgroundColor: '#33D65B',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    iconContentText: {
-        color: 'white',
-        position: 'absolute',
-        left: 4,
-        bottom: 8,
-        justifyContent: 'center'
-    },
-    icon: {
-        position: 'relative',
-        top: 2
-    },
-    estimatePriceText: {
-        marginLeft: 10,
-        fontSize: 18,
-        color: 'skyblue',
-    },
-    quantityText: {
-        fontSize: 18,
-        color: 'white'
-    },
-    go: {
-        color: 'white',
-        fontSize: 20
-    }
-};

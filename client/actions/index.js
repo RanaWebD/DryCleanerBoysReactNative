@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 let totalPrice = 0,
-    totalQuantity = 0;
+    totalQuantity = 0,
+    selectedItemsObj = [];
 
 export const onTimeSubmit = (schduleTime) => {
     return {
@@ -10,38 +11,51 @@ export const onTimeSubmit = (schduleTime) => {
     };
 };
 
+export const selectedOffer = () => {
+    return {
+        type: 'SELECTED_OFFER',
+        payload: 'selectedOffer'
+    };
+};
+
+//Selected Item Action creator coming from LitItem.js
+export const selectedItem = (Item) => {
+    selectedItemsObj.push(Item);
+    return {
+        type: 'SELECTED_ITEM',
+        payload: selectedItemsObj
+    };
+};
+
+
 //Send Otp
 export const onAddressSubmit = (address) => {
     //Send a requst to node server so that node server can send a otp request to MSG91 server
     const numberObj = { number: address.number };
     JSON.stringify(numberObj);
-
-    axios.post('http://192.168.0.106:3000/sendOTP', numberObj)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(error => {
-            console.log(error);
-        });
-
-    return {
-        type: 'ADDRESS',
-        payload: address
+    return (dispatch) => {
+        axios.post('http://192.168.0.106:3000/sendOTP', numberObj)
+            .then(response => {
+                dispatch({
+                    type: 'OTP_SEND_RESPONSE',
+                    payload: { address, status: response.data }
+                });
+            })
+            .catch(err => { dispatch({ type: 'OTP_SEND_RESPONSE', payload: err.status }); });
     };
 };
 
 //Verify Otp
 export const verifyOtp = (data) => {
-    axios.post('http://192.168.0.106:3000/verifyOTP', data)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    return {
-        type: 'OTP_VERIFY_RESPONSE',
-        payload: data
+    return (dispatch) => {
+        axios.post('http://192.168.0.106:3000/verifyOTP', data)
+            .then(response => {
+                dispatch({
+                    type: 'OTP_VERIFY_RESPONSE',
+                    payload: response.data
+                });
+            })
+            .catch(err => { dispatch({ type: 'OTP_VERIFY_RESPONSE', payload: err.status }); });
     };
 };
 
