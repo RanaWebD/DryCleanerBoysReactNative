@@ -32,6 +32,14 @@ const selectedItemReducer = (state = {}, action) => {
     return state;
 };
 
+const otpResendStatusReducer = (state = {}, actions) => {
+    switch (actions.type) {
+        case 'RESEND_OTP_RESPONSE':
+            return actions.payload;
+    }
+    return state;
+};
+
 const otpVerifyStatusReducer = (state = {}, actions) => {
     switch (actions.type) {
         case 'OTP_VERIFY_RESPONSE':
@@ -52,6 +60,7 @@ export default combineReducers({
     Time: timeReducer,
     Address: addressReducer,
     PriceListFooterData: PriceListFooterDataReducer,
+    resendOtpResponse: otpResendStatusReducer,
     otpVerifyStatus: otpVerifyStatusReducer,
     selectedOffer: selectedOfferReducer,
     SelectedItem: selectedItemReducer,

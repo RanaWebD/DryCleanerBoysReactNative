@@ -45,6 +45,19 @@ export const onAddressSubmit = (address) => {
     };
 };
 
+export const resendOTP = (number) => {
+    return (dispatch) => {
+        axios.post('http://192.168.0.106:3000/resendOTP', number)
+            .then(response => {
+                dispatch({
+                    type: 'RESEND_OTP_RESPONSE',
+                    payload: { status: response.data }
+                });
+            })
+            .catch(err => { dispatch({ type: 'RESEND_OTP_RESPONSE', payload: err.status }); });
+    };
+};
+
 //Verify Otp
 export const verifyOtp = (data) => {
     return (dispatch) => {

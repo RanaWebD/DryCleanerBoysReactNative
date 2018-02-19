@@ -21,14 +21,21 @@ var settings = {
 
 // create a post route and get post data from client side request
 app.post('/sendOTP', (req, res) => {
-    res.send('number_verified_successfully');
-    // const URL = `${config.sendOTP}${req.body.number}`;
-    // //send a post request on MSG91 with the req.body
-    // axios.post(URL)
-    //     .then(response => { res.send(response.data.message) })
-    //     .catch(err => { res.send(err) })
+    const URL = `${config.sendOTP}${req.body.number}`;
+    //send a post request on MSG91 with the req.body
+    axios.post(URL)
+        .then(response => { res.send(response.data.message) })
+        .catch(err => { res.send(err) })
 });
 
+// create a post route and get post data from client side request
+app.post('/resendOTP', (req, res) => {
+    const URL = `${config.resendOTP}${req.body.number}`;
+    //send a post request on MSG91 with the req.body
+    axios.post(URL)
+        .then(response => { res.send(response.data.message) })
+        .catch(err => { res.send(err) })
+});
 
 
 //create a post route and get post data from client side request

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Button } from 'react-native';
+import { Text, View, ScrollView, Button, TouchableOpacity } from 'react-native';
 import { FormLabel, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { verifyOtp } from '../actions';
+import { verifyOtp, resendOTP } from '../actions';
 import ButtonContainer from '../common/ButtonContainer';
 import styles from '../css/ConfirmOtpCSS';
 
@@ -14,6 +14,7 @@ class ConformOtp extends Component {
     }
 
     componentWillMount() {
+        console.log(this.props.Address)
         const { address } = this.props.Address;
         const time = this.props.Time;
         const QandP = this.props.PriceListFooterData;
@@ -84,13 +85,23 @@ class ConformOtp extends Component {
         }
     }
 
+    onResendOTP() {
+        this.props.resendOTP('8802869692');
+    }
+
     render() {
-        const { container, labelStyle, inputStyle } = styles;
+        const { container, labelStyle, subLabel, resendText, inputStyle } = styles;
         return (
             <View style={container}>
                 <ScrollView>
                     <FormLabel labelStyle={labelStyle}>W R I T E  OTP</FormLabel>
+                    <View><Text style={subLabel}>Check your mobile for OTP</Text></View>
                     <FormInput onChangeText={OTP => { this.setState({ OTP }); }} inputStyle={inputStyle} />
+                    <TouchableOpacity
+                        onPress={this.onResendOTP()}
+                    >
+                        <Text style={resendText}>Resend OTP!</Text>
+                    </TouchableOpacity>
                 </ScrollView>
                 <ButtonContainer>
                     <Button
@@ -104,9 +115,9 @@ class ConformOtp extends Component {
     }
 }
 
-function mapStateToProps({ Time, Address, PriceListFooterData, otpVerifyStatus }) {
-    return { Time, Address, PriceListFooterData, otpVerifyStatus };
+function mapStateToProps({ Time, Address, PriceListFooterData, otpVerifyStatus, resendOtpResponse }) {
+    return { Time, Address, PriceListFooterData, otpVerifyStatus, resendOtpResponse };
 }
 
-export default connect(mapStateToProps, { verifyOtp })(ConformOtp);
+export default connect(mapStateToProps, { verifyOtp, resendOTP })(ConformOtp);
 

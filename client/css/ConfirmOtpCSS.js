@@ -7,11 +7,20 @@ const styles = StyleSheet.create({
     },
     labelStyle: {
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 35
     },
     inputStyle: {
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 25
+    },
+    subLabel: {
+        textAlign: 'center',
+        color: 'gray'
+    },
+    resendText: {
+        textAlign: 'center',
+        color: '#33D65B',
+        fontSize: 15
     }
 });
 
