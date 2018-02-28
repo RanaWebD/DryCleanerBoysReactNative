@@ -1,17 +1,17 @@
 import { combineReducers } from 'redux';
 import { MenLibrary, WomenLibrary, HouseHoldLibrary, CharakhLibrary, AccessoriesLibrary, WoolenLibrary } from './LibraryReducer';
 
-const timeReducer = (state = {}, actions) => {
-    switch (actions.type) {
+const timeReducer = (state = {}, action) => {
+    switch (action.type) {
         case 'ON_TIME_SUBMIT':
-            return actions.payload;
+            return action.payload;
     }
     return state;
 }
-const addressReducer = (state = {}, actions) => {
-    switch (actions.type) {
+const addressReducer = (state = {}, action) => {
+    switch (action.type) {
         case 'OTP_SEND_RESPONSE':
-            return actions.payload;
+            return action.payload;
     }
     return state;
 };
@@ -32,26 +32,26 @@ const selectedItemReducer = (state = {}, action) => {
     return state;
 };
 
-const otpResendStatusReducer = (state = {}, actions) => {
-    switch (actions.type) {
+const otpResendStatusReducer = (state = {}, action) => {
+    switch (action.type) {
         case 'RESEND_OTP_RESPONSE':
-            return actions.payload;
+            return action.payload;
     }
     return state;
 };
 
-const otpVerifyStatusReducer = (state = {}, actions) => {
-    switch (actions.type) {
+const otpVerifyStatusReducer = (state = {}, action) => {
+    switch (action.type) {
         case 'OTP_VERIFY_RESPONSE':
-            return actions.payload;
+            return action.payload;
     }
     return state;
 }
 
-const PriceListFooterDataReducer = (state = {}, actions) => {
-    switch (actions.type) {
+const PriceListFooterDataReducer = (state = {}, action) => {
+    switch (action.type) {
         case 'PRICE_EXTIMATE':
-            return actions.payload;
+            return action.payload;
     }
     return state;
 };

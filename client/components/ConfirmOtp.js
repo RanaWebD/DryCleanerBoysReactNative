@@ -14,7 +14,6 @@ class ConformOtp extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props.Address)
         const { address } = this.props.Address;
         const time = this.props.Time;
         const QandP = this.props.PriceListFooterData;
@@ -22,6 +21,17 @@ class ConformOtp extends Component {
         const { name, number, add, state, pincode, iron, wash, laundry, dryClean } = address;
         const { quantity, price } = QandP;
         const { pickupDate, pickupDay, pickupTime, deliveryDate, deliveryDay, deliveryTime } = time;
+        const { offerCategory, offerPrice, offerQuantity, offerValidity } = this.props.selectedOffer;
+        let offer = '';
+
+        if (!!offerCategory) {
+            offer = ` You select ${offerQuantity} ${offerCategory} offer at ${offerPrice} price ${offerValidityString}`;
+
+            let offerValidityString = '';
+            if (!offerValidity) {
+                offerValidityString = `for ${offerValidity}`;
+            }
+        }
 
         //Combine all things together
         let services = '';
@@ -47,9 +57,9 @@ class ConformOtp extends Component {
             "country": "91",
             "sms": [
                 {
-                    "message": name + services + ' Contact no: ' + number + totalQuantity + totalPrice + fullAddress + fullTime,
+                    "message": name + services + offer + ' Contact no: ' + number + totalQuantity + totalPrice + fullAddress + fullTime + '. Our pickup boy will reach you soon. Thank you.',
                     "to": [
-                        number,
+                        number
                     ]
                 },
             ]
@@ -61,14 +71,8 @@ class ConformOtp extends Component {
         this.setState({ data, number });
     }
 
-
-    onConfirm() {
-        let otpVerifyStatus = this.props.otpVerifyStatus;
-        //Action
-        this.props.verifyOtp(this.state);
-        //API response take some second to response so that we used setTimeout
-        //Redirect the page if API response is 200
-        switch (otpVerifyStatus) {
+    componentWillReceiveProps(nextProps) {
+        switch (nextProps.otpVerifyStatus) {
             case 'otp_verified':
                 //Redirect page to an another page
                 this.props.onOtpComfirm();
@@ -80,13 +84,25 @@ class ConformOtp extends Component {
                 alert('Number not found go back and check your number!!');
                 break;
             case 'otp_not_verified':
-                alert('Wrong OTP!!');
+                alert('Wrong OTP!');
                 break;
+            case 'invalid_otp':
+                alert('Wrong OTP!')
+        }
+    }
+
+    onConfirm() {
+        if (!this.state.OTP) {
+            alert("Please enter OTP!")
+        } else {
+            //Action
+            this.props.verifyOtp(this.state);
         }
     }
 
     onResendOTP() {
-        this.props.resendOTP('8802869692');
+        this.props.resendOTP(this.state.number);
+        alert(this.props.resendOtpResponse.status);
     }
 
     render() {
@@ -98,7 +114,7 @@ class ConformOtp extends Component {
                     <View><Text style={subLabel}>Check your mobile for OTP</Text></View>
                     <FormInput onChangeText={OTP => { this.setState({ OTP }); }} inputStyle={inputStyle} />
                     <TouchableOpacity
-                        onPress={this.onResendOTP()}
+                        onPress={this.onResendOTP.bind(this)}
                     >
                         <Text style={resendText}>Resend OTP!</Text>
                     </TouchableOpacity>
@@ -115,8 +131,8 @@ class ConformOtp extends Component {
     }
 }
 
-function mapStateToProps({ Time, Address, PriceListFooterData, otpVerifyStatus, resendOtpResponse }) {
-    return { Time, Address, PriceListFooterData, otpVerifyStatus, resendOtpResponse };
+function mapStateToProps({ Time, Address, PriceListFooterData, otpVerifyStatus, resendOtpResponse, selectedOffer }) {
+    return { Time, Address, PriceListFooterData, otpVerifyStatus, resendOtpResponse, selectedOffer };
 }
 
 export default connect(mapStateToProps, { verifyOtp, resendOTP })(ConformOtp);

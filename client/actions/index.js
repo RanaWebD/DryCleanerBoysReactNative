@@ -11,16 +11,16 @@ export const onTimeSubmit = (schduleTime) => {
     };
 };
 
-export const selectedOffer = () => {
+export const selectOffer = (item) => {
     return {
         type: 'SELECTED_OFFER',
-        payload: 'selectedOffer'
+        payload: item
     };
 };
 
 //Selected Item Action creator coming from LitItem.js
-export const selectedItem = (Item) => {
-    selectedItemsObj.push(Item);
+export const selectedItem = (item) => {
+    selectedItemsObj.push(item);
     return {
         type: 'SELECTED_ITEM',
         payload: selectedItemsObj
@@ -46,8 +46,9 @@ export const onAddressSubmit = (address) => {
 };
 
 export const resendOTP = (number) => {
+    const numberObj = { number };
     return (dispatch) => {
-        axios.post('http://192.168.0.106:3000/resendOTP', number)
+        axios.post('http://192.168.0.106:3000/resendOTP', numberObj)
             .then(response => {
                 dispatch({
                     type: 'RESEND_OTP_RESPONSE',

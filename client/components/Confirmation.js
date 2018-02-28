@@ -32,7 +32,32 @@ class Confirmation extends Component {
                 );
             });
         }
+        if (this.props.selectedOffer !== {}) {
+            return (
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                    <View style={{ flexDirection: 'row', flex: 1 }}>
+                        <Text>{this.props.selectedOffer.offerCategory}</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'center' }}>
+                        <Text>{this.props.selectedOffer.offerQuantity}</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'center' }}>
+                        <Text>{this.props.selectedOffer.offerPrice}</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'center' }}>
+                        <Text>{this.props.selectedOffer.offerValidity}</Text>
+                    </View>
+                </View>
+            );
+        }
         return;
+    }
+
+    servicesHeading() {
+        const { address } = this.props.Address;
+        if (address.DryCleanService !== '' || address.LaundryService !== '' || address.WashingService !== '' || address.IroningService !== '') {
+            return <Text style={styles.title}>Services:</Text>;
+        }
     }
 
     render() {
@@ -53,7 +78,9 @@ class Confirmation extends Component {
                                     <Text >{address.name}</Text>
                                 </View>
                                 <View style={content}>
-                                    <Text style={title}>Quantity: </Text>
+                                    {this.props.PriceListFooterData.totalQuantity !== undefined ?
+                                        <Text style={styles.title}>Quantity: </Text> : null
+                                    }
                                     <Text>{quantity}</Text>
                                 </View>
                                 <View>
@@ -71,7 +98,9 @@ class Confirmation extends Component {
                                     <Text>{address.number}</Text>
                                 </View>
                                 <View style={content}>
-                                    <Text style={title}>Price: </Text>
+                                    {this.props.PriceListFooterData.totalPrice !== undefined ?
+                                        <Text style={title}>Price: </Text> : null
+                                    }
                                     <Text>{totalPrice}</Text>
                                 </View>
                                 <View>
@@ -92,7 +121,7 @@ class Confirmation extends Component {
                             <Text>{address.pincode}</Text>
                         </View>
                         <View style={cardSection}>
-                            <Text style={title}>Services:</Text>
+                            {this.servicesHeading()}
                             <View style={servicesContent}>
                                 <Text>{address.DryCleanService}</Text>
                                 <Text>{address.LaundryService}</Text>
@@ -101,7 +130,8 @@ class Confirmation extends Component {
                             </View>
                         </View>
                         <View style={cardSection}>
-                            <Text style={title}>Selected Items</Text>
+                            {this.props.selectedOffer !== 'none' ? <Text style={styles.title}>Selected Offer:</Text> : null}
+                            {this.props.SelectedItem[0] !== undefined ? <Text style={styles.title}>Selected Items:</Text> : null}
                             <View style={{ marginTop: 5 }}>
                                 {this.text()}
                             </View>
@@ -120,8 +150,8 @@ class Confirmation extends Component {
     }
 }
 
-function mapStateToProps({ Time, Address, PriceListFooterData, SelectedItem }) {
-    return { Time, Address, PriceListFooterData, SelectedItem };
+function mapStateToProps({ Time, Address, PriceListFooterData, SelectedItem, selectedOffer }) {
+    return { Time, Address, PriceListFooterData, SelectedItem, selectedOffer };
 }
 
 export default connect(mapStateToProps)(Confirmation);

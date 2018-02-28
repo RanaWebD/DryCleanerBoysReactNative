@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, TabBarTop } from 'react-navigation';
 
-import WelcomeScreen from '../screens/WelcomeScreen';
 import MainScreen from '../screens/MainScreen';
 import SelectTimeScreen from '../screens/SelectTimeScreen';
 import SelectAddressScreen from '../screens/SelectAddressScreen';
@@ -31,9 +30,14 @@ export const PriceListNavigator = TabNavigator({
       }
     },
     navigationOptions: {
+      headerTitle: 'Price List',
       headerTintColor: 'white',
       headerStyle: { backgroundColor: '#04A2E1' }
-    }
+    },
+    tabBarComponent: TabBarTop,
+    tabBarPosition: 'top',
+    animationEnabled: false,
+    swipeEnabled: true,
   }
 );
 
@@ -58,7 +62,6 @@ export const HomeStack = StackNavigator({
   }
 }, {
     navigationOptions: {
-      title: 'Price List',
       headerTintColor: 'white',
       headerStyle: { backgroundColor: '#04A2E1' }
     }
@@ -66,7 +69,6 @@ export const HomeStack = StackNavigator({
 );
 
 export const RootStackNavigator = TabNavigator({
-  // welcome: { screen: WelcomeScreen },
   main: {
     screen: HomeStack,
   },

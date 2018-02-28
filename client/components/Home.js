@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, Image, ScrollView, Linking, Button } from 'react-native';
 import { connect } from 'react-redux';
-import selectedOffer from '../actions/';
+import { selectOffer } from '../actions';
 import Card from '../common/Card';
 import styles from '../css/homeCSS';
 
@@ -12,59 +12,74 @@ class MainScreen extends Component {
         this.state = { washAndFold: false, washAndIron: false, dryClean: false, laundry: false };
     }
 
+    componentWillReceiveProps(nextPros) {
+        this.props.onOfferSelected();
+    }
+
+    onOfferPress(offer) {
+        this.props.selectOffer(offer);
+    }
+
     offerJXS() {
         const { offerContainer, imageBackground, offerContent, offerHeading, offerItem, offerPriceContent, offerPriceText, offerPriceAmount, validityText } = styles;
         const data = [
             {
-                url: '../assets/images/landscape-1427642388-ironing-steam.jpg',
-                category: 'I R O N I N G',
-                quantity: '400 Clothes',
-                price: 999,
-                validity: '3 months'
+                url: require('../assets/images/903194c73f76c9ad83c90079c985ffd3.jpg'),
+                offerCategory: 'I R O N I N G  T R I A L',
+                offerQuantity: '4 Clothes',
+                offerPrice: 'Free',
+                offerValidity: 'Only for first time'
             },
             {
-                url: '../assets/images/shutterstock_526101427.jpg',
-                category: 'I R O N I N G',
-                quantity: '200 Clothes',
-                price: 599,
-                validity: '2 months'
+                url: require('../assets/images/landscape-1427642388-ironing-steam.jpg'),
+                offerCategory: 'I R O N I N G',
+                offerQuantity: '400 Clothes',
+                offerPrice: 999,
+                offerValidity: '3 months'
             },
             {
-                url: '../assets/images/ironing.jpg',
-                category: 'I R O N I N G',
-                quantity: '100 clothes',
-                price: 399,
-                validity: '1 months'
+                url: require('../assets/images/shutterstock_526101427.jpg'),
+                offerCategory: 'I R O N I N G',
+                offerQuantity: '200 Clothes',
+                offerPrice: 599,
+                offerValidity: '2 months'
             },
             {
-                url: '../assets/images/pexels-photo-212269.jpeg',
-                category: 'D r y  C l e a n',
-                quantity: '3 Blanket',
-                price: 549
+                url: require('../assets/images/ironing.jpg'),
+                offerCategory: 'I R O N I N G',
+                offerQuantity: '100 clothes',
+                offerPrice: 399,
+                offerValidity: '1 months'
+            },
+            {
+                url: require('../assets/images/pexels-photo-212269.jpeg'),
+                offerCategory: 'D r y  C l e a n',
+                offerQuantity: '3 Blanket',
+                offerPrice: 549
             }
         ];
 
-        return data.map((e, index) => {
+        return data.map((offer, index) => {
             return (
                 <TouchableOpacity
                     key={index}
                     style={{ marginBottom: 8 }}
-                    onPress={() => { }}
+                    onPress={() => this.onOfferPress(offer)}
                 >
                     <Card>
                         <View style={offerContainer}>
                             <ImageBackground
                                 style={imageBackground}
-                                source={require('../assets/images/903194c73f76c9ad83c90079c985ffd3.jpg')}
+                                source={offer.url}
                             >
                                 <View style={offerContent}>
-                                    <Text style={offerHeading}>{e.category}</Text>
-                                    <Text style={offerItem}>{e.quantity}</Text>
+                                    <Text style={offerHeading}>{offer.offerCategory}</Text>
+                                    <Text style={offerItem}>{offer.offerQuantity}</Text>
                                     <View style={offerPriceContent}>
                                         <Text style={offerPriceText}>only in</Text>
-                                        <Text style={offerPriceAmount}>{e.price}</Text>
+                                        <Text style={offerPriceAmount}>{offer.offerPrice}</Text>
                                     </View>
-                                    <Text style={validityText}>{e.validity}</Text>
+                                    <Text style={validityText}>{offer.offerValidity}</Text>
                                 </View>
                             </ImageBackground>
                         </View>
@@ -89,19 +104,6 @@ class MainScreen extends Component {
                             onPress={() => this.props.onPress('go-to-booknow')}
                         />
                     </View>
-                    <Card>
-                        <View style={offerContainer}>
-                            <ImageBackground
-                                style={imageBackground}
-                                source={require('../assets/images/903194c73f76c9ad83c90079c985ffd3.jpg')}
-                            >
-                                <View style={offerContent}>
-                                    <Text style={offerHeading}>I R O N I N G  T R I A L</Text>
-                                    <Text style={offerItem}>4 Clothes</Text>
-                                </View>
-                            </ImageBackground>
-                        </View>
-                    </Card>
                     {this.offerJXS()}
                 </ScrollView>
                 <View style={footer}>
@@ -140,4 +142,8 @@ class MainScreen extends Component {
     }
 }
 
-export default connect(null, { selectedOffer })(MainScreen);
+const mapStateToProps = ({ selectedOffer }) => {
+    return { selectedOffer };
+};
+
+export default connect(mapStateToProps, { selectOffer })(MainScreen);

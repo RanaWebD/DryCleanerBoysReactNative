@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, Button } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ButtonContainer from '../common/ButtonContainer';
-import { onTimeSubmit } from '../actions/index';
+import { onTimeSubmit } from '../actions';
 import styles from '../css/SelectTimeCSS';
 
 class SelectTime extends Component {
@@ -59,6 +59,7 @@ class SelectTime extends Component {
             disableTimeStyle3: null,
             disableTimeStyle4: null,
             disableTimeStyle5: null,
+            disableCalender: null,
             //Selected elements
             selectedPickupDate: null,
             selectedPickupDay: null,
@@ -595,6 +596,7 @@ class SelectTime extends Component {
                                 <TouchableOpacity
                                     onPress={() => { this.onCalendarPress(0, 0); }}
                                     style={dateCard}
+                                    disabled={this.state.disableCalender}
                                 >
                                     <Text style={day}>{this.state.daysArray[0]}</Text>
                                     <View style={dateContent}>
@@ -744,7 +746,7 @@ class SelectTime extends Component {
                     <Button
                         title="N E X T   S T E P"
                         color="#04A2E1"
-                        onPress={() => this.onSubmit()}
+                        onPress={this.onSubmit.bind(this)}
                     />
                 </ButtonContainer>
             </View >

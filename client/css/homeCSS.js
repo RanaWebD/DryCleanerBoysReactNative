@@ -6,11 +6,7 @@ const styles = StyleSheet.create({
         height: 80,
         backgroundColor: '#04A2E1',
         justifyContent: 'center',
-        alignItems: 'center',
-        shadowOpacity: 0.75,
-        shadowRadius: 5,
-        shadowColor: 'red',
-        shadowOffset: { height: 0, width: 0 },
+        alignItems: 'center'
     },
     headerText: {
         fontWeight: 'bold',

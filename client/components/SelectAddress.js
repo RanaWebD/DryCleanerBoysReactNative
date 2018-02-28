@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Button } from 'react-native';
+import { ScrollView, View, Button, KeyboardAvoidingView } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage, CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { onAddressSubmit } from '../actions';
@@ -26,6 +26,20 @@ class SelectAddress extends Component {
             WashingService: false,
             IroningService: false
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+
+        this.props.onConfirm();
+        //Redirect the page if API response is 200
+        if (nextProps.Address.status !== 'Please Enter valid mobile no') {
+            alert('OTP Send!');
+            this.props.onConfirm();
+        } else {
+            //Alert user in condition of server down etc.
+            alert("Please Enter valid mobile no.");
+        }
     }
 
     //Toggle the services checkboxes
@@ -84,99 +98,95 @@ class SelectAddress extends Component {
         } else {
             //Action creator
             this.props.onAddressSubmit(address);
-            //API response take some second to response so that we used setTimeout
-            setTimeout(() => {
-                //Redirect the page if API response is 200
-                if (this.props.Address.status !== 'Please Enter valid mobile no') {
-                    alert('OTP Send!');
-                    this.props.onConfirm();
-                } else {
-                    //Alert user in condition of server down etc.
-                    alert("Please Enter valid mobile no.");
-                }
-            }, 2000);
         }
     }
 
     render() {
         const { stateAndPincodeFormContent, formContainer, servicesSection, servicesContent, servicesCheckBoxContainer } = styles;
         return (
-            <ScrollView
+            <View
                 style={{ flex: 1 }}
-                pagingEnabled
             >
-                <View>
-                    <FormLabel>Name</FormLabel>
-                    <FormInput onChangeText={name => { this.setState({ name }); }} />
-                    <FormValidationMessage>{this.state.nameErr}</FormValidationMessage>
-                </View>
-                <View>
-                    <FormLabel>Address</FormLabel>
-                    <FormInput onChangeText={address => { this.setState({ address }); }} />
-                    <FormValidationMessage>{this.state.addressErr}</FormValidationMessage>
-                </View>
-                <View>
-                    <FormLabel>Contect Number</FormLabel>
-                    <FormInput type='number' onChangeText={number => { this.setState({ number }); }} />
-                    <FormValidationMessage>{this.state.numberErr}</FormValidationMessage>
-                </View>
-                <View style={stateAndPincodeFormContent}>
-                    <View style={formContainer}>
-                        <FormLabel>State</FormLabel>
-                        <FormInput onChangeText={state => { this.setState({ state }); }} />
-                        <FormValidationMessage>{this.state.stateErr}</FormValidationMessage>
-                    </View>
-                    <View style={formContainer}>
-                        <FormLabel>PinCode</FormLabel>
-                        <FormInput onChangeText={pincode => { this.setState({ pincode }); }} />
-                        <FormValidationMessage>{this.state.pincodeErr}</FormValidationMessage>
-                    </View>
-                </View>
+                <ScrollView>
+                    <KeyboardAvoidingView
 
-                <View style={servicesSection}>
-                    <FormLabel>Services</FormLabel>
-                    <View style={servicesContent}>
-                        <View style={servicesCheckBoxContainer}>
-                            <CheckBox
-                                title='Dry Clean'
-                                checked={this.state.DryCleanService}
-                                onPress={() => this.onServicePress('dry')}
-                            />
+                        behavior="padding"
+                    >
+                        <View>
+                            <FormLabel>Name</FormLabel>
+                            <FormInput onChangeText={name => { this.setState({ name }); }} />
+                            <FormValidationMessage>{this.state.nameErr}</FormValidationMessage>
                         </View>
-                        <View style={servicesCheckBoxContainer}>
-                            <CheckBox
-                                title='Laundry'
-                                checked={this.state.LaundryService}
-                                onPress={() => this.onServicePress('laundry')}
-                            />
+                        <View>
+                            <FormLabel>Address</FormLabel>
+                            <FormInput onChangeText={address => { this.setState({ address }); }} />
+                            <FormValidationMessage>{this.state.addressErr}</FormValidationMessage>
                         </View>
-                    </View>
+                        <View>
+                            <FormLabel>Contect Number</FormLabel>
+                            <FormInput type='number' onChangeText={number => { this.setState({ number }); }} />
+                            <FormValidationMessage>{this.state.numberErr}</FormValidationMessage>
+                        </View>
+                        <View style={stateAndPincodeFormContent}>
+                            <View style={formContainer}>
+                                <FormLabel>State</FormLabel>
+                                <FormInput onChangeText={state => { this.setState({ state }); }} />
+                                <FormValidationMessage>{this.state.stateErr}</FormValidationMessage>
+                            </View>
+                            <View style={formContainer}>
+                                <FormLabel>PinCode</FormLabel>
+                                <FormInput onChangeText={pincode => { this.setState({ pincode }); }} />
+                                <FormValidationMessage>{this.state.pincodeErr}</FormValidationMessage>
+                            </View>
+                        </View>
 
-                    <View style={servicesContent}>
-                        <View style={servicesCheckBoxContainer}>
-                            <CheckBox
-                                title='Washing'
-                                checked={this.state.WashingService}
-                                onPress={() => this.onServicePress('wash')}
-                            />
+                        <View style={servicesSection}>
+                            <FormLabel>Services</FormLabel>
+                            <View style={servicesContent}>
+                                <View style={servicesCheckBoxContainer}>
+                                    <CheckBox
+                                        title='Dry Clean'
+                                        checked={this.state.DryCleanService}
+                                        onPress={() => this.onServicePress('dry')}
+                                    />
+                                </View>
+                                <View style={servicesCheckBoxContainer}>
+                                    <CheckBox
+                                        title='Laundry'
+                                        checked={this.state.LaundryService}
+                                        onPress={() => this.onServicePress('laundry')}
+                                    />
+                                </View>
+                            </View>
+
+                            <View style={servicesContent}>
+                                <View style={servicesCheckBoxContainer}>
+                                    <CheckBox
+                                        title='Washing'
+                                        checked={this.state.WashingService}
+                                        onPress={() => this.onServicePress('wash')}
+                                    />
+                                </View>
+                                <View style={servicesCheckBoxContainer}>
+                                    <CheckBox
+                                        title='Ironing'
+                                        checked={this.state.IroningService}
+                                        onPress={() => this.onServicePress('iron')}
+                                    />
+                                </View>
+                            </View>
                         </View>
-                        <View style={servicesCheckBoxContainer}>
-                            <CheckBox
-                                title='Ironing'
-                                checked={this.state.IroningService}
-                                onPress={() => this.onServicePress('iron')}
-                            />
-                        </View>
-                    </View>
-                </View>
+                    </KeyboardAvoidingView>
+                </ScrollView>
+
                 <ButtonContainer>
                     <Button
                         title="A L M O S T  T H E R E "
                         color="#04A2E1"
-                        onPress={() => this.onSubmit()}
+                        onPress={this.onSubmit.bind(this)}
                     />
                 </ButtonContainer>
-            </ScrollView>
+            </View>
         );
     }
 }

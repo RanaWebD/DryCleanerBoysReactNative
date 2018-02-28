@@ -12,9 +12,14 @@ export default class MainScreen extends Component {
       case 'go-to-booknow': this.props.navigation.navigate('ScheduleTime'); break;
     }
   }
+
+  onOfferSeleted = () => {
+    this.props.navigation.navigate('ScheduleTime');
+  }
+
   render() {
     return (
-      <Home onPress={this.onPress} />
+      <Home onPress={this.onPress} onOfferSelected={this.onOfferSeleted} />
     )
   }
 }
