@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-let totalPrice = 0,
-    totalQuantity = 0,
-    selectedItemsObj = [];
+let totalPrice = 0;
+let totalQuantity = 0;
+const selectedItemsArrObj = [];
 
 export const onTimeSubmit = (schduleTime) => {
     return {
@@ -19,11 +19,11 @@ export const selectOffer = (item) => {
 };
 
 //Selected Item Action creator coming from LitItem.js
-export const selectedItem = (item) => {
-    selectedItemsObj.push(item);
+export const selectItem = (item) => {
+    selectedItemsArrObj.push(item);
     return {
         type: 'SELECTED_ITEM',
-        payload: selectedItemsObj
+        payload: selectedItemsArrObj
     };
 };
 
@@ -34,7 +34,7 @@ export const onAddressSubmit = (address) => {
     const numberObj = { number: address.number };
     JSON.stringify(numberObj);
     return (dispatch) => {
-        axios.post('http://192.168.0.106:3000/sendOTP', numberObj)
+        axios.post('http://drycleanerboys.com:5000/sendOTP', numberObj)
             .then(response => {
                 dispatch({
                     type: 'OTP_SEND_RESPONSE',
@@ -48,7 +48,7 @@ export const onAddressSubmit = (address) => {
 export const resendOTP = (number) => {
     const numberObj = { number };
     return (dispatch) => {
-        axios.post('http://192.168.0.106:3000/resendOTP', numberObj)
+        axios.post('http://drycleanerboys.com:5000/resendOTP', numberObj)
             .then(response => {
                 dispatch({
                     type: 'RESEND_OTP_RESPONSE',
@@ -62,7 +62,7 @@ export const resendOTP = (number) => {
 //Verify Otp
 export const verifyOtp = (data) => {
     return (dispatch) => {
-        axios.post('http://192.168.0.106:3000/verifyOTP', data)
+        axios.post('http://drycleanerboys.com:5000/verifyOTP', data)
             .then(response => {
                 dispatch({
                     type: 'OTP_VERIFY_RESPONSE',

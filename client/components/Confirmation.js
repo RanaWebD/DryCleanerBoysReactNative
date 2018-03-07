@@ -16,9 +16,9 @@ class Confirmation extends Component {
                 ))
             );
 
-            return arr.map(e => {
+            return arr.map((e, index) => {
                 return (
-                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                    <View key={index} style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
                         <View style={{ flexDirection: 'row', flex: 1 }}>
                             <Text>{e.title}</Text>
                         </View>
@@ -55,7 +55,7 @@ class Confirmation extends Component {
 
     servicesHeading() {
         const { address } = this.props.Address;
-        if (address.DryCleanService !== '' || address.LaundryService !== '' || address.WashingService !== '' || address.IroningService !== '') {
+        if (address.DryCleanService || address.LaundryService || address.WashingService || address.IroningService) {
             return <Text style={styles.title}>Services:</Text>;
         }
     }

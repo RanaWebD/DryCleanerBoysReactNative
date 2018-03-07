@@ -14,11 +14,21 @@ class ConformOtp extends Component {
     }
 
     componentWillMount() {
+        const itemArr = [];
+        //Remove duplicate objects into the SelectedItem Array
+        if (this.props.SelectedItem.filter !== undefined) {
+            const arr = this.props.SelectedItem.filter((itemObj, index, self) =>
+                index === self.findIndex((t) => (
+                    t.title === itemObj.title
+                ))
+            );
+            arr.map(itemObj => itemArr.push(itemObj.title, itemObj.itmeTotalQuantity));
+        }
+
         const { address } = this.props.Address;
         const time = this.props.Time;
         const QandP = this.props.PriceListFooterData;
-
-        const { name, number, add, state, pincode, iron, wash, laundry, dryClean } = address;
+        const { name, number, add, state, pincode, IroningService, WashingService, LaundryService, DryCleanService } = address;
         const { quantity, price } = QandP;
         const { pickupDate, pickupDay, pickupTime, deliveryDate, deliveryDay, deliveryTime } = time;
         const { offerCategory, offerPrice, offerQuantity, offerValidity } = this.props.selectedOffer;
@@ -40,8 +50,8 @@ class ConformOtp extends Component {
         const fullAddress = `. Address: ${add} ${state} ${pincode}`;
         const fullTime = `. Pickup time: ${pickupDate} ${pickupDay} ${pickupTime}. Delivery time: ${deliveryDate} ${deliveryDay} ${deliveryTime}`;
 
-        if (iron || wash || laundry || dryClean) {
-            services = `, You choose ${iron} ${wash} ${laundry} ${dryClean} services.`;
+        if (IroningService || WashingService || LaundryService || DryCleanService) {
+            services = `, You choose ${IroningService} ${WashingService} ${LaundryService} ${DryCleanService} services. `;
         }
         if (quantity !== undefined) {
             totalQuantity = ` Quantity: '${quantity}`;
@@ -52,14 +62,15 @@ class ConformOtp extends Component {
 
 
         const data = {
-            "sender": "SOCKET",
+            "sender": "DRYCLN",
             "route": "4",
             "country": "91",
             "sms": [
                 {
-                    "message": name + services + offer + ' Contact no: ' + number + totalQuantity + totalPrice + fullAddress + fullTime + '. Our pickup boy will reach you soon. Thank you.',
+                    "message": name + services + itemArr + offer + ' Contact no: ' + number + totalQuantity + totalPrice + fullAddress + fullTime + '. Our pickup boy will reach you soon. Thank you.',
                     "to": [
-                        number
+                        number,
+                        7027151616
                     ]
                 },
             ]
@@ -71,32 +82,32 @@ class ConformOtp extends Component {
         this.setState({ data, number });
     }
 
-    componentWillReceiveProps(nextProps) {
-        switch (nextProps.otpVerifyStatus) {
-            case 'otp_verified':
-                //Redirect page to an another page
-                this.props.onOtpComfirm();
-                break;
-            case 'invalid_mobile':
-                alert('Invalid number type format go back and check!!');
-                break;
-            case 'mobile_not_found':
-                alert('Number not found go back and check your number!!');
-                break;
-            case 'otp_not_verified':
-                alert('Wrong OTP!');
-                break;
-            case 'invalid_otp':
-                alert('Wrong OTP!')
-        }
-    }
-
     onConfirm() {
         if (!this.state.OTP) {
             alert("Please enter OTP!")
         } else {
             //Action
             this.props.verifyOtp(this.state);
+
+            setTimeout(() => {
+                switch (this.props.otpVerifyStatus) {
+                    case 'otp_verified':
+                        //Redirect page to an another page
+                        this.props.onOtpComfirm();
+                        break;
+                    case 'invalid_mobile':
+                        alert('Invalid number type format go back and check!!');
+                        break;
+                    case 'mobile_not_found':
+                        alert('Number not found go back and check your number!!');
+                        break;
+                    case 'otp_not_verified':
+                        alert('Wrong OTP!');
+                        break;
+                    case 'invalid_otp':
+                        alert('Wrong OTP!')
+                }
+            }, 2000);
         }
     }
 
@@ -131,8 +142,8 @@ class ConformOtp extends Component {
     }
 }
 
-function mapStateToProps({ Time, Address, PriceListFooterData, otpVerifyStatus, resendOtpResponse, selectedOffer }) {
-    return { Time, Address, PriceListFooterData, otpVerifyStatus, resendOtpResponse, selectedOffer };
+function mapStateToProps({ Time, Address, PriceListFooterData, otpVerifyStatus, resendOtpResponse, selectedOffer, SelectedItem }) {
+    return { Time, Address, PriceListFooterData, otpVerifyStatus, resendOtpResponse, selectedOffer, SelectedItem };
 }
 
 export default connect(mapStateToProps, { verifyOtp, resendOTP })(ConformOtp);

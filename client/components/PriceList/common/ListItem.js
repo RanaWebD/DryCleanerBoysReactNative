@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { PriceExtimate, selectedItem } from '../../../actions';
+import { PriceExtimate, selectItem } from '../../../actions';
 import Card from '../../../common/Card';
 import styles from '../../../css/ListItemCSS';
 
 // this component render every time when some chick on any list item that why all values reset every time
-class ListItem extends Component {
+class ListItem extends PureComponent {
     constructor(props) {
         super(props);
 
@@ -41,7 +41,7 @@ class ListItem extends Component {
 
         //Call a action creater with the val and price paramenters
         this.props.PriceExtimate(val, price, quantity);
-        this.props.selectedItem(data);
+        this.props.selectItem(data);
     }
 
     render() {
@@ -79,4 +79,4 @@ class ListItem extends Component {
 }
 
 //Connet react component with redux store and action creator with the help of react-redux connect funtion
-export default connect(null, { PriceExtimate, selectedItem })(ListItem);
+export default connect(null, { PriceExtimate, selectItem })(ListItem);

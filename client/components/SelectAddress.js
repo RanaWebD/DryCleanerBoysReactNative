@@ -28,20 +28,6 @@ class SelectAddress extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-
-        this.props.onConfirm();
-        //Redirect the page if API response is 200
-        if (nextProps.Address.status !== 'Please Enter valid mobile no') {
-            alert('OTP Send!');
-            this.props.onConfirm();
-        } else {
-            //Alert user in condition of server down etc.
-            alert("Please Enter valid mobile no.");
-        }
-    }
-
     //Toggle the services checkboxes
     onServicePress(value) {
         switch (value) {
@@ -98,6 +84,16 @@ class SelectAddress extends Component {
         } else {
             //Action creator
             this.props.onAddressSubmit(address);
+            setTimeout(() => {
+                //Redirect the page if API response is 200
+                if (this.props.Address.status !== 'Please Enter valid mobile no') {
+                    alert('OTP Sent!');
+                    this.props.onConfirm();
+                } else {
+                    //Alert user in condition of server down etc.
+                    alert("Please Enter valid mobile no.");
+                }
+            }, 2000);
         }
     }
 

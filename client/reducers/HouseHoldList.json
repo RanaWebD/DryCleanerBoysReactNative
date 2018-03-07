@@ -8,55 +8,55 @@
     {
         "id": 2,
         "title": "Curtain(M) upto 6ft",
-        "price": 50,
+        "price": 80,
         "img": "https://cdn.pixabay.com/photo/2017/08/07/18/40/door-2606613_960_720.jpg"
     },
     {
         "id": 3,
         "title": "Curtain(L) upto 6ft",
-        "price": 50,
+        "price": 100,
         "img": "https://cdn.pixabay.com/photo/2017/09/15/16/57/room-2752817_960_720.jpg"
     },
     {
         "id": 4,
         "title": "Pillow Cover",
-        "price": 50,
+        "price": 40,
         "img": "https://cdn.pixabay.com/photo/2015/03/02/11/03/home-decor-655841_960_720.jpg"
     },
     {
         "id": 5,
         "title": "Cartpet",
-        "price": 80,
+        "price": 20,
         "img": "https://cdn.pixabay.com/photo/2017/11/10/09/01/carpet-2935773_960_720.jpg"
     },
     {
         "id": 6,
         "title": "Face Towel",
-        "price": 100,
+        "price": 50,
         "img": "https://cdn.pixabay.com/photo/2017/10/06/11/51/kermit-2822841_960_720.jpg"
     },
     {
         "id": 7,
         "title": "Large Towel",
-        "price": 50,
+        "price": 60,
         "img": "https://cdn.pixabay.com/photo/2016/03/26/22/30/bathroom-1281614_960_720.jpg"
     },
     {
         "id": 8,
         "title": "Bedsheet/Cover(Single)",
-        "price": 150,
+        "price": 80,
         "img": "https://cdn.pixabay.com/photo/2016/01/19/17/41/bed-linen-1149842_960_720.jpg"
     },
     {
         "id": 9,
         "title": "Bedsheet/Cover(Double)",
-        "price": 200,
+        "price": 120,
         "img": "https://cdn.pixabay.com/photo/2013/11/08/04/35/bridal-suite-207216_960_720.jpg"
     },
     {
         "id": 10,
         "title": "Table Cover",
-        "price": 50,
+        "price": 100,
         "img": "https://cdn.pixabay.com/photo/2017/09/22/18/51/pasta-2776716_960_720.jpg"
     }
 ]

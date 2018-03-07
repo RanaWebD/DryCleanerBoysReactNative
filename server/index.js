@@ -22,14 +22,19 @@ var settings = {
     }
 }
 
+app.post('/sendSMS', (req, res) => {
+    axios.post(config.sendSMS, req.body.myKey, settings)
+        .then(response => res.send(response.data));
+});
+
 // create a post route and get post data from client side request
 app.post('/sendOTP', (req, res) => {
-    // res.send("something")
-    const URL = `${config.sendOTP}${req.body.number}`;
-    //send a post request on MSG91 with the req.body
-    axios.post(URL)
-        .then(response => { res.send(response.data.message) })
-        .catch(err => { res.send(err) })
+    res.send("something")
+    // const URL = `${config.sendOTP}${req.body.number}`;
+    // //send a post request on MSG91 with the req.body
+    // axios.post(URL)
+    //     .then(response => { res.send(response.data.message) })
+    //     .catch(err => { res.send(err) })
 });
 
 // create a post route and get post data from client side request
@@ -44,9 +49,6 @@ app.post('/resendOTP', (req, res) => {
 //create a post route and get post data from client side request
 app.post('/verifyOTP', (req, res) => {
     // res.send('otp_verified');
-    // axios.post(config.sendSMS, req.body.data, settings)
-    //     .then(response => res.send(response.data));
-
     if (req.body.OTP !== null) {
         let url = `${config.verifyOTP}${req.body.number}&otp=${req.body.OTP}`;
         axios.post(url)
@@ -59,4 +61,6 @@ app.post('/verifyOTP', (req, res) => {
     }
 });
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'));
+const PORT = process.env.PORT || 10000;
+
+app.listen(PORT, () => console.log(PORT));
