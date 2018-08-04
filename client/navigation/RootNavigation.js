@@ -13,6 +13,9 @@ import MenScreen from '../screens/PriceListScreens/MenScreen';
 import WomenScreen from '../screens/PriceListScreens/WomenScreen';
 import WoolenScreen from '../screens/PriceListScreens/WoolenScreen';
 import HouseHoldScreen from '../screens/PriceListScreens/HouseHoldScreen';
+import SteamIronScreen from '../screens/PriceListScreens/SteamIronScreen';
+import IronScreen from '../screens/PriceListScreens/IronScreen';
+import StarchCharakhScreen from '../screens/PriceListScreens/StarchCharakhScreen';
 
 export const PriceListNavigator = TabNavigator({
   men: { screen: MenScreen },
@@ -41,9 +44,89 @@ export const PriceListNavigator = TabNavigator({
   }
 );
 
+export const CategoryPriceListNavigator = TabNavigator({
+  men: { screen: MenScreen },
+  women: { screen: WomenScreen },
+  house_hold: { screen: HouseHoldScreen }
+}, {
+    tabBarOptions: {
+      scrollEnabled: true,
+      activeTintColor: '#ffffff',
+      style: {
+        backgroundColor: '#04A2E1'
+      }
+    },
+    navigationOptions: {
+      headerTitle: 'Price List',
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#04A2E1' }
+    },
+    tabBarComponent: TabBarTop,
+    tabBarPosition: 'top',
+    animationEnabled: false,
+    swipeEnabled: true,
+  }
+);
+
+export const CategorySteamIronNavigator = TabNavigator({
+  Steam_Iron: { screen: SteamIronScreen },
+  Iron: {screen: IronScreen}
+}, {
+    tabBarOptions: {
+      scrollEnabled: true,
+      activeTintColor: '#ffffff',
+      style: {
+        backgroundColor: '#04A2E1'
+      }
+    },
+    navigationOptions: {
+      headerTitle: 'Price List',
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#04A2E1' }
+    },
+    tabBarComponent: TabBarTop,
+    tabBarPosition: 'top',
+    animationEnabled: false,
+    swipeEnabled: true,
+  }
+);
+
+export const CategoryStarchCharakhNavigator = TabNavigator({
+  Starch_Charakh: { screen: StarchCharakhScreen },
+  // Iron: {screen: IronScreen}
+}, {
+    tabBarOptions: {
+      scrollEnabled: true,
+      activeTintColor: '#ffffff',
+      style: {
+        backgroundColor: '#04A2E1'
+      }
+    },
+    navigationOptions: {
+      headerTitle: 'Price List',
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#04A2E1' }
+    },
+    tabBarComponent: TabBarTop,
+    tabBarPosition: 'top',
+    animationEnabled: false,
+    swipeEnabled: true,
+  }
+);
+
+
 export const HomeStack = StackNavigator({
   Home: {
     screen: MainScreen
+  },
+  CategoryPriceListNavigator:{
+    screen: CategoryPriceListNavigator
+  },
+  CategorySteamIronNavigator:{
+    screen: CategorySteamIronNavigator
+  },
+  CategoryStarchCharakhNavigator:{
+    screen: CategoryStarchCharakhNavigator
   },
   PriceList: {
     screen: PriceListNavigator,

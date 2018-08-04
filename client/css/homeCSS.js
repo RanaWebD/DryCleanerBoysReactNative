@@ -14,47 +14,52 @@ const styles = StyleSheet.create({
         color: 'white',
         marginTop: 20
     },
-    offerContainer: {
-        height: 180
-    },
-    imageBackground: {
-        backgroundColor: '#ccc',
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        justifyContent: 'center'
-    },
-    offerContent: {
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.2)'
-    },
-    offerHeading: {
-        fontSize: 30,
-        marginBottom: 15,
-        color: 'white'
-    },
-    offerItem: {
-        fontSize: 25,
-        color: 'white',
-        marginBottom: 10
-    },
-    offerPriceContent: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-    },
-    offerPriceText: {
-        color: 'gray',
-        width: 50
-    },
-    offerPriceAmount: {
-        fontSize: 30,
-        color: '#33D65B'
-    },
-    validityText: {
-        color: 'white'
-    },
     content: {
         padding: 10
+    },
+    dryCleanCategory:{
+        flex: 1, 
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRightColor: '#015C7F',
+        borderRightWidth: 1,
+        borderBottomColor: '#015C7F',
+        borderBottomWidth: 1,
+        marginLeft: 10,
+        marginTop: 10
+    },
+    washAndFoldCategory:{ 
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderLeftColor: '#015C7F',
+        borderLeftWidth: 1,
+        borderBottomColor: '#015C7F',
+        borderBottomWidth: 1,
+        marginRight: 10,
+        marginTop: 10
+    },
+    washAndIronCategory:{ 
+        flex: 1, 
+        justifyContent: 'center',
+        alignItems: 'center', 
+        borderRightColor: '#015C7F',
+        borderRightWidth: 1,
+        borderTopColor: '#015C7F',
+        borderTopWidth: 1,
+        marginLeft: 10,
+        marginBottom: 10
+},
+    streamIronCategory:{
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        borderLeftColor: '#015C7F',
+        borderLeftWidth: 1,
+        borderTopColor: '#015C7F',
+        borderTopWidth: 1,
+        marginRight: 10,
+        marginBottom: 10
     },
     footer: {
         height: 50,
@@ -69,6 +74,12 @@ const styles = StyleSheet.create({
     },
     footerText: {
         color: 'white'
+    },
+    serviceCategoryText:{
+        color: 'white',
+        borderColor: 'white',
+        borderBottomWidth: 1
+
     },
     bookNowBtn: {
         padding: 10

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { MenLibrary, WomenLibrary, HouseHoldLibrary, CharakhLibrary, AccessoriesLibrary, WoolenLibrary } from './LibraryReducer';
+import { MenLibrary, WomenLibrary, HouseHoldLibrary, CharakhLibrary, AccessoriesLibrary, WoolenLibrary, SteamIronLibrary, StarchCharakhLibrary, LandingPageOffersLibrary } from './LibraryReducer';
 
 const timeReducer = (state = {}, action) => {
     switch (action.type) {
@@ -69,6 +69,9 @@ export default combineReducers({
     HouseHoldLibrary: HouseHoldLibrary,
     CharakhLibrary: CharakhLibrary,
     AccessoriesLibrary: AccessoriesLibrary,
-    WoolenLibrary: WoolenLibrary
+    WoolenLibrary: WoolenLibrary,
+    SteamIronLibrary: SteamIronLibrary,
+    StarchCharakhLibrary: StarchCharakhLibrary,
+    LandingPageOffersLibrary: LandingPageOffersLibrary
 });
 

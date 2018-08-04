@@ -1,0 +1,36 @@
+[
+    {
+        "url": "require('../assets/images/903194c73f76c9ad83c90079c985ffd3.jpg')",
+        "offerCategory": "I R O N I N G  T R I A L",
+        "offerQuantity": "4 Clothes",
+        "offerPrice": "Free",
+        "offerValidity": "Only for first time"
+    },
+    {
+        "url": "require('../assets/images/landscape-1427642388-ironing-steam.jpg')",
+        "offerCategory": "I R O N I N G",
+        "offerQuantity": "400 Clothes",
+        "offerPrice": 999,
+        "offerValidity": "3 months"
+    },
+    {
+        "url": "require('../assets/images/shutterstock_526101427.jpg')",
+        "offerCategory": "I R O N I N G",
+        "offerQuantity": "200 Clothes",
+        "offerPrice": 599,
+        "offerValidity": "2 months"
+    },
+    {
+        "url": "require('../assets/images/ironing.jpg')",
+        "offerCategory": "I R O N I N G",
+        "offerQuantity": "100 clothes",
+        "offerPrice": 399,
+        "offerValidity": "1 months"
+    },
+    {
+        "url": "require('../assets/images/pexels-photo-212269.jpeg')",
+        "offerCategory": "D r y  C l e a n",
+        "offerQuantity": "3 Blanket",
+        "offerPrice": 549
+    }
+]

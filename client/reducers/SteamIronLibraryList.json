@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "title": "Coat/Blazer",
+        "price": 150,
+        "img": "https://images.unsplash.com/photo-1438354886727-070458b3b5cf?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3f9d26b790bab974d3f22c770d3b0dd2&auto=format&fit=crop&w=644&q=80"
+    },
+    {
+        "id": 2,
+        "title": "Coat Pant/3pec",
+        "price": 200,
+        "img": "https://images.unsplash.com/photo-1459204137123-238c569e22bd?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ed903569f094146d1e8294f47999c106&auto=format&fit=crop&w=753&q=80"
+    },
+    {
+        "id": 3,
+        "title": "Rexine Jacket",
+        "price": 200,
+        "img": "https://images.unsplash.com/photo-1438763298591-75a0d42b7265?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5e68a9b1f38a8030d9dc3aab48ca1d27&auto=format&fit=crop&w=750&q=80"
+    },
+    {
+        "id": 4,
+        "title": "Sweater",
+        "price": 100,
+        "img": "https://image.freepik.com/free-photo/sweater-on-wooden-background_1203-8157.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Half Sweater",
+        "price": 80,
+        "img": "https://cdn.pixabay.com/photo/2016/03/27/19/31/fashion-1283863_960_720.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Kurta Pyjama",
+        "price": 100,
+        "img": "https://cdn.pixabay.com/photo/2017/01/01/11/05/asian-boys-1944326_960_720.jpg"
+    },
+    {
+        "id": 7,
+        "title": "Ladies Suit",
+        "price": 100,
+        "img": "https://cdn.pixabay.com/photo/2015/07/15/16/52/salwar-kameez-846702_960_720.jpg"
+    },
+    {
+        "id": 8,
+        "title": "T-Shirt",
+        "price": 50,
+        "img": "https://cdn.pixabay.com/photo/2017/01/13/04/56/blank-1976334_960_720.png"
+    },
+    {
+        "id": 9,
+        "title": "Shirt",
+        "price": 50,
+        "img": "https://cdn.pixabay.com/photo/2017/11/02/14/27/model-2911332_960_720.jpg"
+    },
+    {
+        "id": 10,
+        "title": "Trouser",
+        "price": 50,
+        "img": "https://cdn.pixabay.com/photo/2017/08/27/05/33/trousers-2685231_960_720.jpg"
+    },
+    {
+        "id": 11,
+        "title": "Curtain",
+        "price": 50,
+        "img": "https://cdn.pixabay.com/photo/2017/10/17/10/12/architecture-2860066_960_720.png"
+    }
+]

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, ImageBackground, Image, ScrollView, Linking, Button } from 'react-native';
-import { connect } from 'react-redux';
-import { selectOffer } from '../actions';
+import { View, Text, TouchableOpacity, ImageBackground, Image, ScrollView, Linking, Button, Dimensions } from 'react-native';
 import Card from '../common/Card';
 import styles from '../css/homeCSS';
+import ImageSlider from '../common/Slider';
+const { width } = Dimensions.get('window')
 
 class MainScreen extends Component {
     constructor(props) {
@@ -12,91 +12,47 @@ class MainScreen extends Component {
         this.state = { washAndFold: false, washAndIron: false, dryClean: false, laundry: false };
     }
 
-    componentWillReceiveProps(nextPros) {
-        this.props.onOfferSelected();
-    }
-
-    onOfferPress(offer) {
-        this.props.selectOffer(offer);
-    }
-
-    offerJXS() {
-        const { offerContainer, imageBackground, offerContent, offerHeading, offerItem, offerPriceContent, offerPriceText, offerPriceAmount, validityText } = styles;
-        const data = [
-            {
-                url: require('../assets/images/903194c73f76c9ad83c90079c985ffd3.jpg'),
-                offerCategory: 'I R O N I N G  T R I A L',
-                offerQuantity: '4 Clothes',
-                offerPrice: 'Free',
-                offerValidity: 'Only for first time'
-            },
-            {
-                url: require('../assets/images/landscape-1427642388-ironing-steam.jpg'),
-                offerCategory: 'I R O N I N G',
-                offerQuantity: '400 Clothes',
-                offerPrice: 999,
-                offerValidity: '3 months'
-            },
-            {
-                url: require('../assets/images/shutterstock_526101427.jpg'),
-                offerCategory: 'I R O N I N G',
-                offerQuantity: '200 Clothes',
-                offerPrice: 599,
-                offerValidity: '2 months'
-            },
-            {
-                url: require('../assets/images/ironing.jpg'),
-                offerCategory: 'I R O N I N G',
-                offerQuantity: '100 clothes',
-                offerPrice: 399,
-                offerValidity: '1 months'
-            },
-            {
-                url: require('../assets/images/pexels-photo-212269.jpeg'),
-                offerCategory: 'D r y  C l e a n',
-                offerQuantity: '3 Blanket',
-                offerPrice: 549
-            }
-        ];
-
-        return data.map((offer, index) => {
-            return (
-                <TouchableOpacity
-                    key={index}
-                    style={{ marginBottom: 8 }}
-                    onPress={() => this.onOfferPress(offer)}
-                >
-                    <Card>
-                        <View style={offerContainer}>
-                            <ImageBackground
-                                style={imageBackground}
-                                source={offer.url}
-                            >
-                                <View style={offerContent}>
-                                    <Text style={offerHeading}>{offer.offerCategory}</Text>
-                                    <Text style={offerItem}>{offer.offerQuantity}</Text>
-                                    <View style={offerPriceContent}>
-                                        <Text style={offerPriceText}>only in</Text>
-                                        <Text style={offerPriceAmount}>{offer.offerPrice}</Text>
-                                    </View>
-                                    <Text style={validityText}>{offer.offerValidity}</Text>
-                                </View>
-                            </ImageBackground>
-                        </View>
-                    </Card>
-                </TouchableOpacity>
-            );
-        });
-    }
-
     render() {
-        const { header, offerContainer, imageBackground, offerContent, offerHeading, offerItem, headerText, bookNowBtn, footer, footerItem, footerText } = styles;
+        const { header, headerText, dryCleanCategory, washAndFoldCategory, washAndIronCategory, streamIronCategory, bookNowBtn, serviceCategoryText, footer, footerItem, footerText } = styles;
         return (
-            <View style={{ flex: 1 }}>
+            <ImageBackground style={{
+                position: 'absolute', width, height: '100%', justifyContent: 'center'
+            }} source={require('../assets/images/weather.png')}>
                 <View style={header}>
                     <Text style={headerText}>DryCleaner Boys</Text>
                 </View>
                 <ScrollView>
+                    <Card>
+                        <ImageSlider navigation={this.props.navigation} />
+                    </Card>
+                    <Card>
+                        <View style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            height: 140,
+                            backgroundColor: '#02729D',
+                        }}>
+                            <TouchableOpacity style={dryCleanCategory} onPress={() => this.props.onPress('category-price-list')}>
+                                <ImageBackground style={{ width: 64, height: 64, }} source={require('../assets/images/clean.png')}></ImageBackground>
+                                <Text style={serviceCategoryText}>DRY CLEANING</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={washAndFoldCategory} onPress={() => this.props.onPress('starch/charakh')}>
+                                <ImageBackground style={{ width: 64, height: 64 }} source={require('../assets/images/fashion.png')}></ImageBackground>
+                                <Text style={serviceCategoryText}>Starch/Charakh</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ display: 'flex', flexDirection: 'row', height: 140, backgroundColor: '#02729D' }}>
+                            <TouchableOpacity style={washAndIronCategory} onPress={() => alert("3")}>
+                                <ImageBackground style={{ width: 64, height: 64 }} source={require('../assets/images/washing-machine.png')}></ImageBackground>
+                                <Text style={serviceCategoryText}>WASH & IRON</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={streamIronCategory} onPress={() => this.props.onPress('steam-iron')} >
+                                <ImageBackground style={{ width: 64, height: 64 }} source={require('../assets/images/laundering.png')}></ImageBackground>
+                                <Text style={serviceCategoryText}>STEAM IRON</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Card>
+
                     <View style={bookNowBtn}>
                         <Button
                             title='D I R E C T  B O O K I N G'
@@ -104,18 +60,10 @@ class MainScreen extends Component {
                             onPress={() => this.props.onPress('go-to-booknow')}
                         />
                     </View>
-                    {this.offerJXS()}
                 </ScrollView>
+
+
                 <View style={footer}>
-                    {/* <TouchableOpacity
-                        onPress={() => this.props.onPress('go-to-home')}
-                        style={footerItem}
-                    >
-                        <Image
-                            source={require('../assets/images/home.png')}
-                        />
-                        <Text style={footerText}>Home</Text>
-                    </TouchableOpacity> */}
                     <TouchableOpacity
                         onPress={() => this.props.onPress('go-to-price')}
                         style={footerItem}
@@ -137,13 +85,9 @@ class MainScreen extends Component {
                         <Text style={footerText}>WebSite</Text>
                     </TouchableOpacity>
                 </View>
-            </View >
+            </ImageBackground >
         );
     }
 }
 
-const mapStateToProps = ({ selectedOffer }) => {
-    return { selectedOffer };
-};
-
-export default connect(mapStateToProps, { selectOffer })(MainScreen);
+export default MainScreen;
