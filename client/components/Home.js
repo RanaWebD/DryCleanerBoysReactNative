@@ -15,9 +15,7 @@ class MainScreen extends Component {
     render() {
         const { header, headerText, dryCleanCategory, washAndFoldCategory, washAndIronCategory, streamIronCategory, bookNowBtn, serviceCategoryText, footer, footerItem, footerText } = styles;
         return (
-            <ImageBackground style={{
-                position: 'absolute', width, height: '100%', justifyContent: 'center'
-            }} source={require('../assets/images/weather.png')}>
+            <View style={{flex: 1}}>
                 <View style={header}>
                     <Text style={headerText}>DryCleaner Boys</Text>
                 </View>
@@ -42,7 +40,7 @@ class MainScreen extends Component {
                             </TouchableOpacity>
                         </View>
                         <View style={{ display: 'flex', flexDirection: 'row', height: 140, backgroundColor: '#02729D' }}>
-                            <TouchableOpacity style={washAndIronCategory} onPress={() => alert("3")}>
+                            <TouchableOpacity style={washAndIronCategory} onPress={() => this.props.onPress('washIron')}>
                                 <ImageBackground style={{ width: 64, height: 64 }} source={require('../assets/images/washing-machine.png')}></ImageBackground>
                                 <Text style={serviceCategoryText}>WASH & IRON</Text>
                             </TouchableOpacity>
@@ -85,7 +83,7 @@ class MainScreen extends Component {
                         <Text style={footerText}>WebSite</Text>
                     </TouchableOpacity>
                 </View>
-            </ImageBackground >
+            </View>
         );
     }
 }

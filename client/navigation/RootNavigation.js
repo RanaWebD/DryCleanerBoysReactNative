@@ -16,6 +16,8 @@ import HouseHoldScreen from '../screens/PriceListScreens/HouseHoldScreen';
 import SteamIronScreen from '../screens/PriceListScreens/SteamIronScreen';
 import IronScreen from '../screens/PriceListScreens/IronScreen';
 import StarchCharakhScreen from '../screens/PriceListScreens/StarchCharakhScreen';
+import WashIronScreen from '../screens/PriceListScreens/WashIronScreen';
+
 
 export const PriceListNavigator = TabNavigator({
   men: { screen: MenScreen },
@@ -47,7 +49,10 @@ export const PriceListNavigator = TabNavigator({
 export const CategoryPriceListNavigator = TabNavigator({
   men: { screen: MenScreen },
   women: { screen: WomenScreen },
-  house_hold: { screen: HouseHoldScreen }
+  house_hold: { screen: HouseHoldScreen },
+  woolen: { screen: WoolenScreen },
+  charakh: { screen: CharakhScreen },
+  accessories: { screen: AccessoriesScreen },
 }, {
     tabBarOptions: {
       scrollEnabled: true,
@@ -70,7 +75,7 @@ export const CategoryPriceListNavigator = TabNavigator({
 
 export const CategorySteamIronNavigator = TabNavigator({
   Steam_Iron: { screen: SteamIronScreen },
-  Iron: {screen: IronScreen}
+  Iron: { screen: IronScreen }
 }, {
     tabBarOptions: {
       scrollEnabled: true,
@@ -115,18 +120,32 @@ export const CategoryStarchCharakhNavigator = TabNavigator({
 );
 
 
+export const CategoryWashIronListNavigator = StackNavigator({
+  WashIron: {
+    screen: WashIronScreen
+  } }, {
+    navigationOptions: {
+      tabBarVisible: false
+    }
+  }
+);
+
+
 export const HomeStack = StackNavigator({
   Home: {
     screen: MainScreen
   },
-  CategoryPriceListNavigator:{
+  CategoryPriceListNavigator: {
     screen: CategoryPriceListNavigator
   },
-  CategorySteamIronNavigator:{
+  CategorySteamIronNavigator: {
     screen: CategorySteamIronNavigator
   },
-  CategoryStarchCharakhNavigator:{
+  CategoryStarchCharakhNavigator: {
     screen: CategoryStarchCharakhNavigator
+  },
+  CategoryWashIronListNavigator: {
+    screen: WashIronScreen
   },
   PriceList: {
     screen: PriceListNavigator,

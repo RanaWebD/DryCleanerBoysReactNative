@@ -1,10 +1,10 @@
-
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, ScrollView, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { selectOffer } from '../../actions';
 import Card from '../../common/Card';
 import Footer from './common/Footer';
+import ListItem from './common/ListItem';
 
 const { width } = Dimensions.get('window')
 
@@ -13,25 +13,25 @@ class IronPriceListTab extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { washAndFold: false, washAndIron: false, dryClean: false, laundry: false };
+        this.state = {
+            washAndFold: false, washAndIron: false, dryClean: false, laundry: false,
+            IronData: [{
+                "id": 1,
+                "title": "I R O N per peace",
+                "price": 5,
+                "img": "https://images.pexels.com/photos/1282316/pexels-photo-1282316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            }]
+        };
     }
 
     onOfferPress(offer) {
         this.props.selectOffer(offer);
-        console.log(offer)
         this.props.navigation.navigate('ScheduleTime')
     }
 
     offerJXS() {
         const { offerContainer, imageBackground, offerContent, offerHeading, offerItem, offerPriceContent, offerPriceText, offerPriceAmount, validityText } = styles;
         const data = [
-            {
-                url: require('../../assets/images/903194c73f76c9ad83c90079c985ffd3.jpg'),
-                offerCategory: 'I R O N',
-                offerQuantity: 'per peace',
-                offerPrice: '5 Rs.',
-                offerValidity: 'saree, coat, woolen curtain, bedsheet'
-            },
             {
                 url: require('../../assets/images/landscape-1427642388-ironing-steam.jpg'),
                 offerQuantity: '80 Clothes',
@@ -84,11 +84,12 @@ class IronPriceListTab extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <ScrollView>
+                    {this.state.IronData.map((item, i) => <ListItem library={item} key={i} />)}
                     {this.offerJXS()}
                 </ScrollView>
-                
+
                 <Footer navigation={this.props.navigation} />
             </View>
         );

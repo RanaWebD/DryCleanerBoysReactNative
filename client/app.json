@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Dry_Cleaner_Boys",
+    "name": "Drycleaner boys",
     "description": "Dry cleaning and Laundry app.",
     "slug": "dry-cleaner-boys",
     "privacy": "public",
-    "sdkVersion": "24.0.0",
+    "sdkVersion": "32.0.0",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {

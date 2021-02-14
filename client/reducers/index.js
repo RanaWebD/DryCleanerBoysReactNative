@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { MenLibrary, WomenLibrary, HouseHoldLibrary, CharakhLibrary, AccessoriesLibrary, WoolenLibrary, SteamIronLibrary, StarchCharakhLibrary, LandingPageOffersLibrary } from './LibraryReducer';
+import { MenLibrary, WomenLibrary, HouseHoldLibrary, CharakhLibrary, AccessoriesLibrary, WoolenLibrary, SteamIronLibrary, WashIronLibrary, StarchCharakhLibrary, LandingPageOffersLibrary } from './LibraryReducer';
 
 const timeReducer = (state = {}, action) => {
     switch (action.type) {
@@ -8,7 +8,7 @@ const timeReducer = (state = {}, action) => {
     }
     return state;
 }
-const addressReducer = (state = {}, action) => {
+const addressReducer = (state = 'none', action) => {
     switch (action.type) {
         case 'OTP_SEND_RESPONSE':
             return action.payload;
@@ -71,6 +71,7 @@ export default combineReducers({
     AccessoriesLibrary: AccessoriesLibrary,
     WoolenLibrary: WoolenLibrary,
     SteamIronLibrary: SteamIronLibrary,
+    WashIronLibrary: WashIronLibrary,
     StarchCharakhLibrary: StarchCharakhLibrary,
     LandingPageOffersLibrary: LandingPageOffersLibrary
 });

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Button } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Button, ImageBackground, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ButtonContainer from '../common/ButtonContainer';
 import { onTimeSubmit } from '../actions';
 import styles from '../css/SelectTimeCSS';
+
+const { width } = Dimensions.get('window')
 
 class SelectTime extends Component {
     static navigationOptions = {

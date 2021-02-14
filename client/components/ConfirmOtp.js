@@ -20,54 +20,42 @@ class ConformOtp extends Component {
             const arr = this.props.SelectedItem.filter((itemObj, index, self) =>
                 index === self.findIndex((t) => (
                     t.title === itemObj.title
-                ))
+                ))  
             );
             arr.map(itemObj => itemArr.push(itemObj.title, itemObj.itmeTotalQuantity));
         }
 
         const { address } = this.props.Address;
         const time = this.props.Time;
-        const QandP = this.props.PriceListFooterData;
+        const { totalPrice, totalQuantity } = this.props.PriceListFooterData;
         const { name, number, add, state, pincode, IroningService, WashingService, LaundryService, DryCleanService } = address;
-        const { quantity, price } = QandP;
         const { pickupDate, pickupDay, pickupTime, deliveryDate, deliveryDay, deliveryTime } = time;
         const { offerCategory, offerPrice, offerQuantity, offerValidity } = this.props.selectedOffer;
         let offer = '';
 
         if (!!offerCategory) {
-            offer = ` You select ${offerQuantity} ${offerCategory} offer at ${offerPrice} price ${offerValidityString}`;
-
-            let offerValidityString = '';
-            if (!offerValidity) {
-                offerValidityString = `for ${offerValidity}`;
-            }
+                offer = ` You select ${!!offerQuantity? offerQuantity: ''} ${!!offerCategory? offerCategory : '' } offer at ${offerPrice} price for ${!!offerValidity? offerValidity : ''}.`;
         }
 
         //Combine all things together
         let services = '';
-        let totalQuantity = '';
-        let totalPrice = '';
+        let TQandTA = '';
         const fullAddress = `. Address: ${add} ${state} ${pincode}`;
         const fullTime = `. Pickup time: ${pickupDate} ${pickupDay} ${pickupTime}. Delivery time: ${deliveryDate} ${deliveryDay} ${deliveryTime}`;
 
         if (IroningService || WashingService || LaundryService || DryCleanService) {
             services = `, You choose ${IroningService} ${WashingService} ${LaundryService} ${DryCleanService} services. `;
         }
-        if (quantity !== undefined) {
-            totalQuantity = ` Quantity: '${quantity}`;
+        if(!!totalQuantity){
+            TQandTA = ` |Total Quantity: ${totalQuantity} Total Price:  ${totalPrice}|.`    
         }
-        if (price !== undefined) {
-            totalPrice = ` Total Amount: ${quantity}`;
-        }
-
-
         const data = {
             "sender": "DRYCLN",
             "route": "4",
             "country": "91",
             "sms": [
                 {
-                    "message": name + services + itemArr + offer + ' Contact no: ' + number + totalQuantity + totalPrice + fullAddress + fullTime + '. Our pickup boy will reach you soon. Thank you.',
+                    "message": name + services + itemArr + offer + TQandTA + ' Contact no: ' + number + fullAddress + fullTime + '. Our pickup boy will reach you soon. Thank you.',
                     "to": [
                         number,
                         7027151616
@@ -102,7 +90,7 @@ class ConformOtp extends Component {
                         alert('Number not found go back and check your number!!');
                         break;
                     case 'otp_not_verified':
-                        alert('Wrong OTP!');
+                        alert('otp_not_verified. try again.');
                         break;
                     case 'invalid_otp':
                         alert('Wrong OTP!')

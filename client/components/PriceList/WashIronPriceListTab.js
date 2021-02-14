@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, ImageBackground, Image, Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, ImageBackground, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-import { selectOffer } from '../actions';
-import Swiper from 'react-native-swiper';
+import { selectOffer } from '../../actions';
+import Card from '../../common/Card';
 
 const { width } = Dimensions.get('window')
 
@@ -40,72 +40,24 @@ const onOfferPress = (offer, props) => {
     props.navigation.navigate('ScheduleTime')
 }
 
-class ImageSlider extends Component {
+class WashIronPriceListTab extends Component {
     constructor(props) {
         super(props);
         this.state = {
             imagesSlider: [
                 {
-                    url: require('../assets/images/903194c73f76c9ad83c90079c985ffd3.jpg'),
-                    offerCategory: 'I R O N I N G  T R I A L',
-                    offerQuantity: '4 Clothes',
-                    offerPrice: 'Free',
-                    offerValidity: 'Only for first time'
-                },
-                {
-                    url: require('../assets/images/landscape-1427642388-ironing-steam.jpg'),
-                    offerCategory: 'I R O N I N G',
-                    offerQuantity: '400 Clothes',
-                    offerPrice: 999,
-                    offerValidity: '3 months'
-                },
-                {
-                    url: require('../assets/images/shutterstock_526101427.jpg'),
-                    offerCategory: 'I R O N I N G',
-                    offerQuantity: '200 Clothes',
-                    offerPrice: 699,
-                    offerValidity: '2 months'
-                },
-                {
-                    url: require('../assets/images/ironing.jpg'),
-                    offerCategory: 'I R O N I N G',
-                    offerQuantity: '80 clothes',
-                    offerPrice: 299,
-                    offerValidity: '1 months'
-                },
-                {
-                    url: require('../assets/images/pexels-photo-212269.jpeg'),
-                    offerCategory: 'D r y  C l e a n',
-                    offerQuantity: '2 Blanket',
-                    offerPrice: 399
-                },
-                {
-                    url: require('../assets/images/pexels-photo-212269.jpeg'),
-                    offerCategory: 'D r y  C l e a n',
-                    offerQuantity: '3 Blanket',
-                    offerPrice: 549
+                    url: require('../../assets/images/903194c73f76c9ad83c90079c985ffd3.jpg'),
+                    offerCategory: 'WASH + IRON',
+                    offerPrice: '80 /KG',
+                    offerValidity: 'Offer only available on curtain, blanket, woolen, saree, clothes and coat.'
                 }
-            ],
-            height: 199
+            ]
         }
-    }
-
-    
-    componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                height: 200
-            });
-        }, 500);
     }
 
     render() {
         return (
-            <View>
-                <Swiper
-                    autoplay={true}
-                    height={this.state.height}
-                >
+            <Card>
                     {
                         this.state.imagesSlider.map((item, i) => <Slider
                             offer={item}
@@ -114,17 +66,12 @@ class ImageSlider extends Component {
                             key={i}
                         />)
                     }
-                </Swiper>
-            </View>
+            </Card>
         )
     }
 }
 
-const mapStateToProps = ({ LandingPageOffersLibrary }) => {
-    return { LandingPageOffersLibrary };
-};
-
-export default connect(mapStateToProps, { selectOffer })(ImageSlider);
+export default connect(null, { selectOffer })(WashIronPriceListTab);
 
 const styles = {
     offerContainer: {
