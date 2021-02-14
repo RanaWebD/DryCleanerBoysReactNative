@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "expo": "^31.0.0",
     "g": "^2.0.1",
     "react": "16.5.0",
